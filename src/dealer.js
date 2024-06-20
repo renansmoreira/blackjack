@@ -1,4 +1,5 @@
 import { Hand } from "./hand.js"
+import { RoundResult } from "./roundResult.js"
 
 class Dealer {
   deck = {}
@@ -23,6 +24,23 @@ class Dealer {
 
     this.hand.add(dealerCard)
     this.hand.add(this.deck.draw())
+  }
+
+  hit(player) {
+    const card = this.deck.draw()
+    card.turnUp()
+
+    player.collectCard(card)
+
+    if (player.isBusted()) {
+      return RoundResult.DEALER_WINS
+    }
+
+    if (player.hasBlackJack()) {
+      return RoundResult.PLAYER_WINS
+    }
+
+    return RoundResult.CONTINUE
   }
 }
 
