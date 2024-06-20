@@ -1,5 +1,6 @@
 import { Suit } from "./suit.js"
 import { Card } from "./card.js"
+import { Face } from "./face.js"
 
 describe('Card', () => {
   describe('when creating', () => {
@@ -13,6 +14,17 @@ describe('Card', () => {
       expect(card.value).toEqual(expectedValue)
       expect(card.suit).toEqual(expectedSuit)
       expect(card.point).toEqual(expectedPoints)
+      expect(card.face).toEqual(Face.DOWN)
+    })
+  })
+
+  describe('turnUp', () => {
+    it('should turn the card up', () => {
+      const card = new Card('A', Suit.CLUBS, 11)
+
+      card.turnUp()
+
+      expect(card.face).toEqual(Face.UP)
     })
   })
 })
