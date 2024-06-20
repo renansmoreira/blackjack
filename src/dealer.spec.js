@@ -11,7 +11,7 @@ describe('Dealer', () => {
       const dealer = new Dealer(expectedDeck)
 
       expect(dealer.deck).toEqual(expectedDeck)
-      expect(dealer.hand).toHaveLength(0)
+      expect(dealer.hand.cards).toHaveLength(0)
     })
   })
 
@@ -24,9 +24,9 @@ describe('Dealer', () => {
 
       dealer.startGame(player)
 
-      expect(player.hand).toHaveLength(2)
-      expect(player.hand[0].face).toEqual(Face.UP)
-      expect(player.hand[1].face).toEqual(Face.UP)
+      expect(player.hand.cards).toHaveLength(2)
+      expect(player.hand.cards[0].face).toEqual(Face.UP)
+      expect(player.hand.cards[1].face).toEqual(Face.UP)
     })
 
     it('should deal two card to himself', () => {
@@ -34,8 +34,8 @@ describe('Dealer', () => {
 
       dealer.startGame(player)
 
-      expect(dealer.hand).toHaveLength(2)
-      expect(dealer.hand[0].face).toEqual(Face.UP)
+      expect(dealer.hand.cards).toHaveLength(2)
+      expect(dealer.hand.cards[0].face).toEqual(Face.UP)
     })
 
     it('should keep one of the dealer cards faced down (the hold)', () => {
@@ -43,7 +43,7 @@ describe('Dealer', () => {
 
       dealer.startGame(player)
 
-      expect(dealer.hand[1].face).toEqual(Face.DOWN)
+      expect(dealer.hand.cards[1].face).toEqual(Face.DOWN)
     })
   })
 })

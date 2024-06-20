@@ -1,13 +1,15 @@
+import { Hand } from "./hand.js"
+
 class Player {
   name = ''
-  hand = []
+  hand = new Hand()
 
   constructor(name) {
     this.name = name
   }
 
   collectCard(card) {
-    this.hand.push(card)
+    this.hand.add(card)
   }
 }
 

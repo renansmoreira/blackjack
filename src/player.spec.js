@@ -10,7 +10,7 @@ describe('Player', () => {
       const player = new Player(expectedName)
 
       expect(player.name).toEqual(expectedName)
-      expect(player.hand).toHaveLength(0)
+      expect(player.hand.cards).toHaveLength(0)
     })
   })
 
@@ -23,7 +23,7 @@ describe('Player', () => {
 
       player.collectCard(card)
 
-      expect(player.hand).toEqual([card])
+      expect(player.hand.cards).toEqual([card])
     })
   })
 })
