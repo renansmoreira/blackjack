@@ -15,7 +15,7 @@ describe('Dealer', () => {
     })
   })
 
-  describe('when starting the game', () => {
+  describe('startGame', () => {
     const deck = new Deck()
     const player = new Player()
 
