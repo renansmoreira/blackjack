@@ -7,11 +7,20 @@ class Dealer {
   }
 
   startGame(player) {
-    const playerCard = this.deck.draw()
-    player.collectCard(playerCard)
+    const firstCard =this.deck.draw()
+    firstCard.turnUp()
 
-    const card = this.deck.draw()
-    this.hand.push(card)
+    const secondCard = this.deck.draw()
+    secondCard.turnUp()
+
+    player.collectCard(firstCard)
+    player.collectCard(secondCard)
+
+    const dealerCard = this.deck.draw()
+    dealerCard.turnUp()
+
+    this.hand.push(dealerCard)
+    this.hand.push(this.deck.draw())
   }
 }
 
