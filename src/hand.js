@@ -10,6 +10,14 @@ class Hand {
       this.points += card.point
     }
   }
+
+  isBusted() {
+    return this.points > 21
+  }
+
+  isBlackJack() {
+    return this.points === 21
+  }
 }
 
 export { Hand }

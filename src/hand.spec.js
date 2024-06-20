@@ -50,4 +50,36 @@ describe('Hand', () => {
       expect(hand.points).toEqual(10)
     })
   })
+
+  describe('isBusted', () => {
+    it('should check if the hand is busted', () => {
+      const hand = new Hand()
+      hand.add(createFacedUpCard(10, Suit.CLUBS, 10))
+      hand.add(createFacedUpCard(10, Suit.DIAMONDS, 10))
+      hand.add(createFacedUpCard(10, Suit.SPADES, 10))
+
+      const result = hand.isBusted()
+
+      expect(result).toBeTruthy()
+    })
+  })
+
+  describe('isBlackJack', () => {
+    it('should check if the hand contains blackjack', () => {
+      const hand = new Hand()
+      hand.add(createFacedUpCard('A', Suit.CLUBS, 11))
+      hand.add(createFacedUpCard(10, Suit.DIAMONDS, 10))
+
+      const result = hand.isBlackJack()
+
+      expect(result).toBeTruthy()
+    })
+  })
 })
+
+function createFacedUpCard(value, suit, points) {
+  const card = new Card(value, suit, points)
+  card.turnUp()
+
+  return card
+}

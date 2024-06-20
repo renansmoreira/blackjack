@@ -11,6 +11,14 @@ class Player {
   collectCard(card) {
     this.hand.add(card)
   }
+
+  isBusted() {
+    return this.hand.isBusted()
+  }
+
+  hasBlackJack() {
+    return this.hand.isBlackJack()
+  }
 }
 
 export { Player }
