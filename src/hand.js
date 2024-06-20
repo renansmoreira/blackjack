@@ -6,7 +6,9 @@ class Hand {
   add(card) {
     this.cards.push(card)
 
+    if (card.isVisible()) {
       this.points += card.point
+    }
   }
 }
 

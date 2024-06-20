@@ -15,6 +15,10 @@ class Card {
   turnUp() {
     this.face = Face.UP
   }
+
+  isVisible() {
+    return this.face === Face.UP
+  }
 }
 
 export { Card }

@@ -27,4 +27,26 @@ describe('Card', () => {
       expect(card.face).toEqual(Face.UP)
     })
   })
+
+  describe('isVisible', () => {
+    let card;
+
+    beforeEach(() => {
+      card = new Card('K', Suit.SPADES, 10)
+    })
+
+    it('should check that the card if turned up', () => {
+      card.turnUp()
+
+      const result = card.isVisible()
+
+      expect(result).toBeTruthy()
+    })
+
+    it('should check that the card if turned down', () => {
+      const result = card.isVisible()
+
+      expect(result).toBeFalsy()
+    })
+  })
 })
