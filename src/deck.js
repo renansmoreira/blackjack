@@ -38,6 +38,10 @@ class Deck {
       new Card('K', Suit.SPADES, 10),
     ]
   }
+
+  draw() {
+    return this.cards.shift()
+  }
 }
 
 export { Deck }
