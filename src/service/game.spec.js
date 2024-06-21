@@ -1,4 +1,4 @@
-import {jest} from '@jest/globals'
+import { jest } from '@jest/globals'
 import { Dealer } from '../domain/dealer.js'
 import { Game } from './game.js'
 import { Player } from '../domain/player.js'
