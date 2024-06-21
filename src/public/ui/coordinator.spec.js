@@ -1,4 +1,4 @@
-import {jest} from '@jest/globals'
+import { jest } from '@jest/globals'
 import { Coordinator } from "./coordinator"
 import { UI } from './constants'
 
@@ -62,7 +62,98 @@ describe('Coordinator', () => {
     })
   })
 
-  // TODO: Implement hit, stand and restart actions using the API
+  describe('hit', () => {
+    const game = { id: 'fake-id' }
+
+    afterEach(() => {
+      jest.resetAllMocks()
+    })
+
+    it('should call the API with the hit action', async () => {
+      const httpClientMock = {
+        post: jest.fn().mockResolvedValue(game)
+      }
+      const coordinator = new Coordinator(httpClientMock)
+      coordinator.update = jest.fn()
+      await coordinator.start()
+
+      await coordinator.hit()
+
+      expect(httpClientMock.post).toHaveBeenCalledTimes(2)
+      expect(httpClientMock.post).toHaveBeenNthCalledWith(2, `/hit/${game.id}`)
+    })
+
+    it('should update the game', async () => {
+      const httpClientStub = {
+        post: jest.fn().mockResolvedValue(game)
+      }
+      const updateMock = jest.fn()
+      const coordinator = new Coordinator(httpClientStub)
+      coordinator.update = updateMock
+      await coordinator.start()
+
+      await coordinator.hit()
+
+      expect(updateMock).toHaveBeenCalledTimes(2)
+      expect(updateMock).toHaveBeenNthCalledWith(2, game)
+    })
+  })
+
+  describe('stand', () => {
+    const game = { id: 'fake-id' }
+
+    afterEach(() => {
+      jest.resetAllMocks()
+    })
+
+    it('should call the API with the stand action', async () => {
+      const httpClientMock = {
+        post: jest.fn().mockResolvedValue(game)
+      }
+      const coordinator = new Coordinator(httpClientMock)
+      coordinator.update = jest.fn()
+      await coordinator.start()
+
+      await coordinator.stand()
+
+      expect(httpClientMock.post).toHaveBeenCalledTimes(2)
+      expect(httpClientMock.post).toHaveBeenNthCalledWith(2, `/stand/${game.id}`)
+    })
+
+    it('should update the game', async () => {
+      const httpClientStub = {
+        post: jest.fn().mockResolvedValue(game)
+      }
+      const updateMock = jest.fn()
+      const coordinator = new Coordinator(httpClientStub)
+      coordinator.update = updateMock
+      await coordinator.start()
+
+      await coordinator.stand()
+
+      expect(updateMock).toHaveBeenCalledTimes(2)
+      expect(updateMock).toHaveBeenNthCalledWith(2, game)
+    })
+  })
+
+  describe('restart', () => {
+    afterEach(() => {
+      jest.resetAllMocks()
+    })
+
+    it('should call the start action again', async () => {
+      const httpClientStub = {
+        post: jest.fn()
+      }
+      const startMock = jest.fn()
+      const coordinator = new Coordinator(httpClientStub)
+      coordinator.start = startMock
+
+      await coordinator.restart()
+
+      expect(startMock).toHaveBeenCalledTimes(1)
+    })
+  })
 
   describe('start', () => {
     it('should call the API to start the game', async () => {

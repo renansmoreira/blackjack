@@ -4,6 +4,7 @@ import { Score } from "./modules/score"
 import { State } from "./modules/state"
 
 class Coordinator {
+  game = {}
   cards = new Cards()
   score = new Score()
   state = new State()
@@ -33,13 +34,18 @@ class Coordinator {
       })
   }
 
-  hit() {
+  async hit() {
+    this.game = await this.httpClient.post(`/hit/${this.game.id}`)
+    this.update(this.game)
   }
 
-  stand() {
+  async stand() {
+    this.game = await this.httpClient.post(`/stand/${this.game.id}`)
+    this.update(this.game)
   }
 
-  restart() {
+  async restart() {
+    this.start()
   }
 
   update(result) {
@@ -49,8 +55,8 @@ class Coordinator {
   }
 
   async start() {
-    const game = await this.httpClient.post('/start')
-    this.update(game)
+    this.game = await this.httpClient.post('/start')
+    this.update(this.game)
   }
 
   update(game) {
