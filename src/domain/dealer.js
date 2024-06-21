@@ -26,6 +26,8 @@ class Dealer {
     this.hand.add(this.deck.draw())
   }
 
+  // TODO: Add validations for the remaining cards on deck
+  // TODO: Add validations for the game state and block actions
   hit(player) {
     const card = this.deck.draw()
     card.turnUp()
@@ -43,6 +45,8 @@ class Dealer {
     return RoundResult.CONTINUE
   }
 
+  // TODO: Add validations for the remaining cards on deck
+  // TODO: Add validations for the game state and block actions
   stand(player) {
     this.hand.revealHold()
 
