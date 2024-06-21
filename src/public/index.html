@@ -27,9 +27,11 @@
   </div>
 
   <script type="module">
+    import { HttpClient } from "/ui/httpClient.js"
     import { Coordinator } from "/ui/coordinator.js"
 
-    const coordinator = new Coordinator()
+    const httpClient = new HttpClient()
+    const coordinator = new Coordinator(httpClient)
     coordinator.start()
   </script>
 </body>
