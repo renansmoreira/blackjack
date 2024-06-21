@@ -1,7 +1,7 @@
 import express from 'express'
 import { v4 as uuidv4 } from 'uuid';
 
-import { Game } from './game.js';
+import { Game } from './service/game.js';
 
 const app = express()
 const port = 3000

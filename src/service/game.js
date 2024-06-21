@@ -1,7 +1,7 @@
-import { Dealer } from "./domain/dealer.js"
-import { Player } from "./domain/player.js"
-import { Deck } from "./domain/deck.js"
-import { RoundResult } from "./domain/roundResult.js"
+import { Dealer } from "../domain/dealer.js"
+import { Player } from "../domain/player.js"
+import { Deck } from "../domain/deck.js"
+import { RoundResult } from "../domain/roundResult.js"
 
 class Game {
   id = ''

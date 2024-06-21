@@ -1,8 +1,8 @@
 import {jest} from '@jest/globals'
-import { Dealer } from './domain/dealer.js'
+import { Dealer } from '../domain/dealer.js'
 import { Game } from './game.js'
-import { Player } from './domain/player.js'
-import { RoundResult } from './domain/roundResult.js'
+import { Player } from '../domain/player.js'
+import { RoundResult } from '../domain/roundResult.js'
 
 describe('Game', () => {
   describe('when constructing', () => {
