@@ -1,4 +1,4 @@
-import { UI } from "../constants"
+import { UI } from "../constants.js"
 import { State } from "./state"
 
 describe('State', () => {

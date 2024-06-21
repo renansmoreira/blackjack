@@ -1,4 +1,4 @@
-import { UI } from "../constants"
+import { UI } from "../constants.js"
 import { Cards } from "./cards"
 
 describe('Cards', () => {

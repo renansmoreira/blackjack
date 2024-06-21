@@ -1,7 +1,7 @@
-import { UI } from "./constants"
-import { Cards } from "./modules/cards"
-import { Score } from "./modules/score"
-import { State } from "./modules/state"
+import { UI } from "./constants.js"
+import { Cards } from "./modules/cards.js"
+import { Score } from "./modules/score.js"
+import { State } from "./modules/state.js"
 
 class Coordinator {
   game = {}
