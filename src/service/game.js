@@ -21,6 +21,14 @@ class Game {
     this.dealer.startGame(this.player)
     console.log('Starting game id:', this.id)
   }
+
+  hit() {
+    this.state = this.dealer.hit(this.player)
+  }
+
+  stand() {
+    this.state = this.dealer.stand(this.player)
+  }
 }
 
 export { Game }

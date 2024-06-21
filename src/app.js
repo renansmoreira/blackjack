@@ -9,12 +9,22 @@ const port = 3000
 // TODO: Refactor to allow the same API to run multiple games
 const game = new Game(uuidv4())
 
-app.get('/', (req, res) => {
+app.get('/', (_, res) => {
   res.status(200).end()
 })
 
-app.post('/start', (req, res) => {
+app.post('/start', (_, res) => {
   game.start()
+  res.json(game)
+})
+
+app.post('/hit', (_, res) => {
+  game.hit()
+  res.json(game)
+})
+
+app.post('/stand', (_, res) => {
+  game.stand()
   res.json(game)
 })
 

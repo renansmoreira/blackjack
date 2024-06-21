@@ -32,4 +32,68 @@ describe('Game', () => {
       expect(dealerMock.startGame).toHaveBeenCalledWith(game.player)
     })
   })
+
+  describe('hit', () => {
+    const game = new Game('random-id')
+
+    it('should ask the dealer to hit for the player', () => {
+      const dealerMock = {
+        startGame: jest.fn(),
+        hit: jest.fn()
+      }
+      game.dealer = dealerMock
+      game.start()
+
+      game.hit()
+
+      expect(dealerMock.hit).toHaveBeenCalledTimes(1)
+      expect(dealerMock.hit).toHaveBeenCalledWith(game.player)
+    })
+
+    it('should update the game state', () => {
+      const expectedRoundResult = RoundResult.DEALER_WINS
+      const dealerMock = {
+        startGame: jest.fn(),
+        hit: jest.fn().mockReturnValue(RoundResult.DEALER_WINS)
+      }
+      game.dealer = dealerMock
+      game.start()
+
+      game.hit()
+
+      expect(game.state).toEqual(expectedRoundResult)
+    })
+  })
+
+  describe('stand', () => {
+    const game = new Game('random-id')
+
+    it('should ask the dealer to stand for the player', () => {
+      const dealerMock = {
+        startGame: jest.fn(),
+        stand: jest.fn()
+      }
+      game.dealer = dealerMock
+      game.start()
+
+      game.stand()
+
+      expect(dealerMock.stand).toHaveBeenCalledTimes(1)
+      expect(dealerMock.stand).toHaveBeenCalledWith(game.player)
+    })
+
+    it('should update the game state', () => {
+      const expectedRoundResult = RoundResult.PLAYER_WINS
+      const dealerMock = {
+        startGame: jest.fn(),
+        stand: jest.fn().mockReturnValue(expectedRoundResult)
+      }
+      game.dealer = dealerMock
+      game.start()
+
+      game.stand()
+
+      expect(game.state).toEqual(expectedRoundResult)
+    })
+  })
 })
