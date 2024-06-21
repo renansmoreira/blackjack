@@ -1,4 +1,5 @@
 import { Card } from "./card.js"
+import { Face } from "./face.js"
 import { Hand } from "./hand.js"
 import { Suit } from "./suit.js"
 
@@ -48,6 +49,49 @@ describe('Hand', () => {
       hand.add(anotherCard)
 
       expect(hand.points).toEqual(10)
+    })
+  })
+
+  describe('revealHold', () => {
+    it('should reveal a card faced down', () => {
+      const hand = new Hand()
+      hand.add(new Card('A', Suit.CLUBS, 11))
+
+      hand.revealHold()
+
+      expect(hand.cards[0].face).toEqual(Face.UP)
+    })
+
+    it('should add the card value to the score', () => {
+      const hand = new Hand()
+      hand.add(createFacedUpCard(2, Suit.DIAMONDS, 2))
+      hand.add(new Card('A', Suit.CLUBS, 11))
+
+      hand.revealHold()
+
+      expect(hand.points).toEqual(13)
+    })
+
+    it('should not change a card already faced up', () => {
+      const hand = new Hand()
+      hand.add(createFacedUpCard(2, Suit.DIAMONDS, 2))
+      hand.add(new Card('A', Suit.CLUBS, 11))
+      hand.revealHold()
+
+      hand.revealHold()
+
+      expect(hand.cards[0].face).toEqual(Face.UP)
+    })
+
+    it('should not change the score for a card already faced up', () => {
+      const hand = new Hand()
+      hand.add(createFacedUpCard(2, Suit.DIAMONDS, 2))
+      hand.add(new Card('A', Suit.CLUBS, 11))
+      hand.revealHold()
+
+      hand.revealHold()
+
+      expect(hand.points).toEqual(13)
     })
   })
 

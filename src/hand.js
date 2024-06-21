@@ -11,6 +11,15 @@ class Hand {
     }
   }
 
+  revealHold() {
+    const card = this.cards[this.cards.length - 1]
+
+    if (!card.isVisible()) {
+      card.turnUp()
+      this.points += card.point
+    }
+  }
+
   isBusted() {
     return this.points > 21
   }

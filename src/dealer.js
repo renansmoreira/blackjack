@@ -42,6 +42,22 @@ class Dealer {
 
     return RoundResult.CONTINUE
   }
+
+  stand(player) {
+    this.hand.revealHold()
+
+    while (this.hand.points < 17) {
+      const card = this.deck.draw()
+      card.turnUp()
+      this.hand.add(card)
+    }
+
+    if (this.hand.isBusted() || player.points() > this.hand.points) {
+      return RoundResult.PLAYER_WINS
+    }
+
+    return RoundResult.DEALER_WINS
+  }
 }
 
 export { Dealer }

@@ -51,6 +51,19 @@ describe('Player', () => {
       expect(result).toBeTruthy()
     })
   })
+
+  describe('points', () => {
+    it('should display player points', () => {
+      const expectedPoints = 8
+      const player = new Player(name)
+      player.collectCard(createFacedUpCard(5, Suit.CLUBS, 5))
+      player.collectCard(createFacedUpCard(3, Suit.DIAMONDS, 3))
+
+      const result = player.points()
+
+      expect(result).toEqual(expectedPoints)
+    })
+  })
 })
 
 // TODO: Refactor to a test utils file

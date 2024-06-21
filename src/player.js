@@ -19,6 +19,10 @@ class Player {
   hasBlackJack() {
     return this.hand.isBlackJack()
   }
+
+  points() {
+    return this.hand.points
+  }
 }
 
 export { Player }
