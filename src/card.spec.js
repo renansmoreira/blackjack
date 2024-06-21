@@ -5,7 +5,7 @@ import { Face } from "./face.js"
 describe('Card', () => {
   describe('when creating', () => {
     it('should have all necessary attributes', () => {
-      const expectedValue = 7
+      const expectedValue = '7'
       const expectedSuit = Suit.CLUBS
       const expectedPoints = 7
 

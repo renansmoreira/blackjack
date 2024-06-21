@@ -71,11 +71,11 @@ describe('Dealer', () => {
 
     it('should continue if the player has not a blackjack and is not busted', () => {
       deck.cards = [
-        new Card(5, Suit.CLUBS, 5),
-        new Card(5, Suit.HEARTS, 5),
-        new Card(2, Suit.SPADES, 2),
-        new Card(2, Suit.DIAMONDS, 2),
-        new Card(10, Suit.SPADES, 10),
+        new Card('5', Suit.CLUBS, 5),
+        new Card('5', Suit.HEARTS, 5),
+        new Card('2', Suit.SPADES, 2),
+        new Card('2', Suit.DIAMONDS, 2),
+        new Card('10', Suit.SPADES, 10),
       ]
       const dealer = new Dealer(deck)
       dealer.startGame(player)
@@ -87,11 +87,11 @@ describe('Dealer', () => {
 
     it('should check if the player is busted', () => {
       deck.cards = [
-        new Card(10, Suit.CLUBS, 10),
-        new Card(10, Suit.HEARTS, 10),
-        new Card(2, Suit.SPADES, 2),
-        new Card(2, Suit.DIAMONDS, 2),
-        new Card(10, Suit.SPADES, 10),
+        new Card('10', Suit.CLUBS, 10),
+        new Card('10', Suit.HEARTS, 10),
+        new Card('2', Suit.SPADES, 2),
+        new Card('2', Suit.DIAMONDS, 2),
+        new Card('10', Suit.SPADES, 10),
       ]
       const dealer = new Dealer(deck)
       dealer.startGame(player)
@@ -103,11 +103,11 @@ describe('Dealer', () => {
 
     it('should check if the player has a blackjack', () => {
       deck.cards = [
-        new Card(10, Suit.CLUBS, 10),
-        new Card(8, Suit.HEARTS, 8),
-        new Card(2, Suit.SPADES, 2),
-        new Card(2, Suit.DIAMONDS, 2),
-        new Card(3, Suit.SPADES, 3),
+        new Card('10', Suit.CLUBS, 10),
+        new Card('8', Suit.HEARTS, 8),
+        new Card('2', Suit.SPADES, 2),
+        new Card('2', Suit.DIAMONDS, 2),
+        new Card('3', Suit.SPADES, 3),
       ]
       const dealer = new Dealer(deck)
       dealer.startGame(player)
@@ -119,12 +119,12 @@ describe('Dealer', () => {
 
     it('should allow the player to hit if the game needs to continue', () => {
       deck.cards = [
-        new Card(5, Suit.CLUBS, 5),
-        new Card(5, Suit.HEARTS, 5),
-        new Card(2, Suit.SPADES, 2),
-        new Card(2, Suit.DIAMONDS, 2),
-        new Card(3, Suit.SPADES, 3),
-        new Card(3, Suit.HEARTS, 3),
+        new Card('5', Suit.CLUBS, 5),
+        new Card('5', Suit.HEARTS, 5),
+        new Card('2', Suit.SPADES, 2),
+        new Card('2', Suit.DIAMONDS, 2),
+        new Card('3', Suit.SPADES, 3),
+        new Card('3', Suit.HEARTS, 3),
       ]
       const dealer = new Dealer(deck)
       dealer.startGame(player)
@@ -158,12 +158,12 @@ describe('Dealer', () => {
 
     it('should draw more cards for the dealer', () => {
       deck.cards = [
-        new Card(5, Suit.CLUBS, 5),
-        new Card(5, Suit.HEARTS, 5),
-        new Card(10, Suit.SPADES, 10),
-        new Card(2, Suit.DIAMONDS, 2),
-        new Card(4, Suit.SPADES, 4),
-        new Card(5, Suit.HEARTS, 5),
+        new Card('5', Suit.CLUBS, 5),
+        new Card('5', Suit.HEARTS, 5),
+        new Card('10', Suit.SPADES, 10),
+        new Card('2', Suit.DIAMONDS, 2),
+        new Card('4', Suit.SPADES, 4),
+        new Card('5', Suit.HEARTS, 5),
       ]
       const dealer = new Dealer(deck)
       dealer.startGame(player)
@@ -175,10 +175,10 @@ describe('Dealer', () => {
 
     it('should not draw more cards for the dealer', () => {
       deck.cards = [
-        new Card(5, Suit.CLUBS, 5),
-        new Card(5, Suit.HEARTS, 5),
-        new Card(10, Suit.SPADES, 10),
-        new Card(8, Suit.DIAMONDS, 8),
+        new Card('5', Suit.CLUBS, 5),
+        new Card('5', Suit.HEARTS, 5),
+        new Card('10', Suit.SPADES, 10),
+        new Card('8', Suit.DIAMONDS, 8),
       ]
       const dealer = new Dealer(deck)
       dealer.startGame(player)
@@ -191,11 +191,11 @@ describe('Dealer', () => {
     it('should check if the dealer is busted', () => {
       const expectedResult = RoundResult.PLAYER_WINS
       deck.cards = [
-        new Card(5, Suit.CLUBS, 5),
-        new Card(5, Suit.HEARTS, 5),
-        new Card(10, Suit.SPADES, 10),
-        new Card(6, Suit.DIAMONDS, 6),
-        new Card(10, Suit.CLUBS, 10),
+        new Card('5', Suit.CLUBS, 5),
+        new Card('5', Suit.HEARTS, 5),
+        new Card('10', Suit.SPADES, 10),
+        new Card('6', Suit.DIAMONDS, 6),
+        new Card('10', Suit.CLUBS, 10),
       ]
       const dealer = new Dealer(deck)
       dealer.startGame(player)
@@ -208,10 +208,10 @@ describe('Dealer', () => {
     it('should check that the player wins the game', () => {
       const expectedResult = RoundResult.PLAYER_WINS
       deck.cards = [
-        new Card(10, Suit.CLUBS, 10),
-        new Card(10, Suit.HEARTS, 10),
-        new Card(10, Suit.SPADES, 10),
-        new Card(7, Suit.DIAMONDS, 7),
+        new Card('10', Suit.CLUBS, 10),
+        new Card('10', Suit.HEARTS, 10),
+        new Card('10', Suit.SPADES, 10),
+        new Card('7', Suit.DIAMONDS, 7),
       ]
       const dealer = new Dealer(deck)
       dealer.startGame(player)
@@ -224,10 +224,10 @@ describe('Dealer', () => {
     it('should check that the dealer wins the game', () => {
       const expectedResult = RoundResult.DEALER_WINS
       deck.cards = [
-        new Card(10, Suit.SPADES, 10),
-        new Card(7, Suit.DIAMONDS, 7),
-        new Card(10, Suit.CLUBS, 10),
-        new Card(10, Suit.HEARTS, 10),
+        new Card('10', Suit.SPADES, 10),
+        new Card('7', Suit.DIAMONDS, 7),
+        new Card('10', Suit.CLUBS, 10),
+        new Card('10', Suit.HEARTS, 10),
       ]
       const dealer = new Dealer(deck)
       dealer.startGame(player)

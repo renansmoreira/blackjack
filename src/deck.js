@@ -13,10 +13,10 @@ class Deck {
     ]
 
     for (let number = 2; number < 11; number++) {
-      cards.push(new Card(number, Suit.CLUBS, number))
-      cards.push(new Card(number, Suit.DIAMONDS, number))
-      cards.push(new Card(number, Suit.HEARTS, number))
-      cards.push(new Card(number, Suit.SPADES, number))
+      cards.push(new Card(number.toString(), Suit.CLUBS, number))
+      cards.push(new Card(number.toString(), Suit.DIAMONDS, number))
+      cards.push(new Card(number.toString(), Suit.HEARTS, number))
+      cards.push(new Card(number.toString(), Suit.SPADES, number))
     }
 
     this.cards = [

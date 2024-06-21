@@ -9,8 +9,8 @@ describe('Hand', () => {
     let anotherCard
 
     beforeEach(() => {
-      card = new Card(10, Suit.DIAMONDS, 10)
-      anotherCard = new Card(2, Suit.HEARTS, 2)
+      card = new Card('10', Suit.DIAMONDS, 10)
+      anotherCard = new Card('2', Suit.HEARTS, 2)
     })
 
     it('should add one card', () => {
