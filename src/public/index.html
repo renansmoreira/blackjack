@@ -32,6 +32,8 @@
 
     const httpClient = new HttpClient()
     const coordinator = new Coordinator(httpClient)
+
+    coordinator.registerControls()
     coordinator.start()
   </script>
 </body>
