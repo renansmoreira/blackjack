@@ -21,7 +21,7 @@ describe('Coordinator', () => {
       const httpClientMock = {
         post: jest.fn()
       }
-      const coordinator = new Coordinator(httpClientMock)
+      const coordinator = coordinatorFactory(httpClientMock, cardsMock, scoreMock, stateMock)
 
       await coordinator.start()
 
@@ -35,10 +35,7 @@ describe('Coordinator', () => {
       }
       const game = { id: 'fake-game-object' }
       httpClientStub.post.mockReturnValue(game)
-      const coordinator = new Coordinator(httpClientStub)
-      coordinator.cards = cardsMock
-      coordinator.score = scoreMock
-      coordinator.state = stateMock
+      const coordinator = coordinatorFactory(httpClientStub, cardsMock, scoreMock, stateMock)
 
       await coordinator.start()
 
@@ -58,10 +55,7 @@ describe('Coordinator', () => {
       }
       const game = { id: 'fake-game-object' }
       httpClientStub.post.mockReturnValue(game)
-      const coordinator = new Coordinator(httpClientStub)
-      coordinator.cards = cardsMock
-      coordinator.score = scoreMock
-      coordinator.state = stateMock
+      const coordinator = coordinatorFactory(httpClientStub, cardsMock, scoreMock, stateMock)
 
       await coordinator.start()
 
@@ -74,3 +68,12 @@ describe('Coordinator', () => {
     })
   })
 })
+
+function coordinatorFactory(httpClient, cards, score, state) {
+  const coordinator = new Coordinator(httpClient)
+  coordinator.cards = cards
+  coordinator.score = score
+  coordinator.state = state
+
+  return coordinator
+}

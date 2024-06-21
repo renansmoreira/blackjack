@@ -3,6 +3,7 @@ export default async () => {
   return {
     verbose: true,
     transform: {},
-    rootDir: './src'
+    rootDir: './src',
+    testEnvironment: 'jsdom'
   };
 };
