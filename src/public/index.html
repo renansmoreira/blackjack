@@ -3,10 +3,28 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+  <title>Blackjack</title>
 </head>
 <body>
-  Blackjack
+  <p id="winner-banner"></p>
+
+  <div>
+    Dealer
+    <p id="dealer-cards"></p>
+    <p id="dealer-points"></p>
+  </div>
+
+  <div>
+    Player
+    <p id="player-cards"></p>
+    <p id="player-points"></p>
+  </div>
+
+  <div>
+    <button id="hit-button">Hit</button>
+    <button id="stand-button">Stand</button>
+    <button id="restart-button">Restart</button>
+  </div>
 
   <script type="module">
     import { Coordinator } from "/ui/coordinator.js"
