@@ -31,4 +31,11 @@ class Game {
   }
 }
 
-export { Game }
+class GameNullObject {
+  id = ''
+  dealer = {}
+  player = {}
+  state = RoundResult.CONTINUE
+}
+
+export { Game, GameNullObject }
