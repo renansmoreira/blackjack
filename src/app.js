@@ -4,11 +4,13 @@ import path from 'path';
 
 import { Game, GameNullObject } from './service/game.js';
 import { MemoryDatabase } from './infra/database.js';
+import { Mappers } from './infra/mappers.js';
 
 const app = express()
 app.use(express.static(path.join(path.resolve(), 'src', 'public')))
 const port = 3000
 
+const mappers = new Mappers()
 const database = new MemoryDatabase()
 
 app.post('/start', (_, res) => {
@@ -17,7 +19,7 @@ app.post('/start', (_, res) => {
 
   database.addGame(game)
 
-  res.json(game)
+  res.json(mappers.mapGame(game))
 })
 
 app.post('/hit/:id', (req, res) => {
@@ -29,7 +31,7 @@ app.post('/hit/:id', (req, res) => {
   }
 
   game.hit()
-  res.json(game)
+  res.json(mappers.mapGame(game))
 })
 
 app.post('/stand/:id', (req, res) => {
@@ -41,7 +43,7 @@ app.post('/stand/:id', (req, res) => {
   }
 
   game.stand()
-  res.json(game)
+  res.json(mappers.mapGame(game))
 })
 
 app.listen(port, () => {
