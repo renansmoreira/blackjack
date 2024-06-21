@@ -14,6 +14,7 @@ app.get('/', (req, res) => {
 })
 
 app.post('/start', (req, res) => {
+  game.start()
   res.json(game)
 })
 
