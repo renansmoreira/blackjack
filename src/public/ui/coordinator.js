@@ -1,3 +1,4 @@
+import { UI } from "./constants"
 import { Cards } from "./modules/cards"
 import { Score } from "./modules/score"
 import { State } from "./modules/state"
@@ -10,6 +11,41 @@ class Coordinator {
 
   constructor(httpClient) {
     this.httpClient = httpClient
+  }
+
+  registerControls() {
+    document
+      .getElementById(UI.ACTIONS_HIT_ID)
+      .addEventListener('click', () => {
+        this.hit()
+      })
+
+    document
+      .getElementById(UI.ACTIONS_STAND_ID)
+      .addEventListener('click', () => {
+        this.stand()
+      })
+
+    document
+      .getElementById(UI.ACTIONS_RESTART_ID)
+      .addEventListener('click', () => {
+        this.restart()
+      })
+  }
+
+  hit() {
+  }
+
+  stand() {
+  }
+
+  restart() {
+  }
+
+  update(result) {
+    this.updateCards()
+    this.updateScore()
+    this.updateGameState(result)
   }
 
   async start() {

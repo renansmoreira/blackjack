@@ -1,5 +1,6 @@
 import {jest} from '@jest/globals'
 import { Coordinator } from "./coordinator"
+import { UI } from './constants'
 
 describe('Coordinator', () => {
   const cardsMock = {
@@ -15,6 +16,53 @@ describe('Coordinator', () => {
   afterEach(() => {
     jest.resetAllMocks()
   })
+
+  describe('registerControls', () => {
+    beforeEach(() => {
+      document.body.innerHTML = `
+        <button id="${UI.ACTIONS_HIT_ID}">Hit</button>
+        <button id="${UI.ACTIONS_STAND_ID}">Stand</button>
+        <button id="${UI.ACTIONS_RESTART_ID}">Restart</button>
+      `
+    })
+
+    afterEach(() => {
+      document.body.innerHTML = ''
+      jest.resetAllMocks()
+    })
+
+    it('should register the hit control', () => {
+      const coordinator = new Coordinator({})
+      coordinator.hit = jest.fn()
+
+      coordinator.registerControls()
+      document.getElementById(UI.ACTIONS_HIT_ID).click()
+
+      expect(coordinator.hit).toHaveBeenCalledTimes(1)
+    })
+
+    it('should register the stand control', () => {
+      const coordinator = new Coordinator({})
+      coordinator.stand = jest.fn()
+
+      coordinator.registerControls()
+      document.getElementById(UI.ACTIONS_STAND_ID).click()
+
+      expect(coordinator.stand).toHaveBeenCalledTimes(1)
+    })
+
+    it('should register the restart control', () => {
+      const coordinator = new Coordinator({})
+      coordinator.restart = jest.fn()
+
+      coordinator.registerControls()
+      document.getElementById(UI.ACTIONS_RESTART_ID).click()
+
+      expect(coordinator.restart).toHaveBeenCalledTimes(1)
+    })
+  })
+
+  // TODO: Implement hit, stand and restart actions using the API
 
   describe('start', () => {
     it('should call the API to start the game', async () => {
