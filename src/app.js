@@ -45,5 +45,5 @@ app.post('/stand/:id', (req, res) => {
 })
 
 app.listen(port, () => {
-  console.log(`Example app listening on port ${port}`)
+  console.log(`Blackjack app listening on port ${port}`)
 })

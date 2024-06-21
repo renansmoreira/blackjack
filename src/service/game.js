@@ -19,7 +19,6 @@ class Game {
 
   start() {
     this.dealer.startGame(this.player)
-    console.log('Starting game id:', this.id)
   }
 
   hit() {
