@@ -9,10 +9,10 @@ class Game {
   player = {}
   state = RoundResult.CONTINUE
 
-  constructor(id) {
+  constructor(id, shuffleStrategy) {
     this.id = id
 
-    const deck = new Deck()
+    const deck = new Deck(shuffleStrategy)
     this.dealer = new Dealer(deck)
     this.player = new Player('Player')
   }

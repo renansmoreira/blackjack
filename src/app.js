@@ -5,6 +5,7 @@ import path from 'path';
 import { Game, GameNullObject } from './service/game.js';
 import { MemoryDatabase } from './infra/database.js';
 import { Mappers } from './infra/mappers.js';
+import { RandomShuffler } from './domain/shuffleStrategies.js';
 
 const app = express()
 app.use(express.static(path.join(path.resolve(), 'src', 'public')))
@@ -14,7 +15,7 @@ const mappers = new Mappers()
 const database = new MemoryDatabase()
 
 app.post('/start', (_, res) => {
-  const game = new Game(uuidv4())
+  const game = new Game(uuidv4(), new RandomShuffler())
   game.start()
 
   database.addGame(game)

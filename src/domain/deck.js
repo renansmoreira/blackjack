@@ -26,7 +26,7 @@ const createForAllSuits = (value) => {
 class Deck {
   cards = []
 
-  constructor() {
+  constructor(shuffleStrategy) {
     let numberCards = []
 
     for (let number = 2; number < 11; number++) {
@@ -41,6 +41,10 @@ class Deck {
       ...createForAllSuits(CardValue.Q),
       ...createForAllSuits(CardValue.K),
     ]
+
+    if (shuffleStrategy) {
+      this.cards = shuffleStrategy.shuffle(this.cards)
+    }
   }
 
   draw() {

@@ -1,3 +1,4 @@
+import { jest } from '@jest/globals'
 import { Suit } from "./suit.js"
 import { Deck } from "./deck.js"
 import { Face } from "./face.js"
@@ -294,6 +295,22 @@ describe('Deck', () => {
       expect(containsAllCardsFor(CardValue.J, deck.cards)).toBeTruthy()
       expect(containsAllCardsFor(CardValue.Q, deck.cards)).toBeTruthy()
       expect(containsAllCardsFor(CardValue.K, deck.cards)).toBeTruthy()
+    })
+
+    it('should shuffle', () => {
+      const expectedShuffledCards = [
+        new Card(CardValue.K, Suit.CLUBS),
+        new Card(CardValue.TEN, Suit.DIAMONDS),
+        new Card(CardValue.A, Suit.SPADES),
+      ]
+      const shuffleStrategy = {
+        shuffle: jest.fn().mockReturnValue(expectedShuffledCards)
+      }
+
+      const deck = new Deck(shuffleStrategy)
+
+      expect(shuffleStrategy.shuffle).toHaveBeenCalledTimes(1)
+      expect(deck.cards).toEqual(expectedShuffledCards)
     })
   })
 

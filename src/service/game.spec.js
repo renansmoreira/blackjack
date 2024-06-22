@@ -16,6 +16,17 @@ describe('Game', () => {
       expect(game.player).toBeInstanceOf(Player)
       expect(game.state).toEqual(RoundResult.CONTINUE)
     })
+
+    it('should allow to create with a shuffler', () => {
+      const id = 'random-id'
+      const shuffleStrategy = {
+        shuffle: jest.fn()
+      }
+
+      new Game(id, shuffleStrategy)
+
+      expect(shuffleStrategy.shuffle).toHaveBeenCalledTimes(1)
+    })
   })
 
   describe('start', () => {
