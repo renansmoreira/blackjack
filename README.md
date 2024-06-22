@@ -55,10 +55,10 @@ This repository contains a simple implementation of the classic Blackjack game u
 - **src**: All the source files to run the game and the house of the main server file `app.js`
 - **src/domain**: Contains all the domain objects for the game, AKA the rules
 - **src/infra**: Infrastructure file to support the game, like 3rd party libraries (such as database adapters) and mappers
-  = **src/public**: Static assets, the game front-end
-  = **src/public/ui**: Front-end modules and coordinators to handle the screen changes
-  = **src/service**: Project use-cases like the handling the game routines and state
-  = **src/test-helpers**: Test utils file to make testing easier
+- **src/public**: Static assets, the game front-end
+- **src/public/ui**: Front-end modules and coordinators to handle the screen changes
+- **src/service**: Project use-cases like the handling the game routines and state
+- **src/test-helpers**: Test utils file to make testing easier
 
 ## API docs
 
