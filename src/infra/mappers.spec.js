@@ -5,6 +5,7 @@ import { Player } from "../domain/player"
 import { Suit } from "../domain/suit"
 import { Mappers } from "./mappers"
 import { Game } from '../service/game'
+import { createFacedUpCard } from '../test-helpers/utils'
 
 describe('mappers', () => {
   describe('mapCard', () => {
@@ -119,11 +120,3 @@ describe('mappers', () => {
     })
   })
 })
-
-// TODO: Refactor to a test utils file
-function createFacedUpCard(value, suit, points) {
-  const card = new Card(value, suit, points)
-  card.turnUp()
-
-  return card
-}

@@ -1,3 +1,4 @@
+import { createFacedUpCard } from "../test-helpers/utils.js"
 import { Card } from "./card.js"
 import { Player } from "./player.js"
 import { Suit } from "./suit.js"
@@ -65,11 +66,3 @@ describe('Player', () => {
     })
   })
 })
-
-// TODO: Refactor to a test utils file
-function createFacedUpCard(value, suit, points) {
-  const card = new Card(value, suit, points)
-  card.turnUp()
-
-  return card
-}
