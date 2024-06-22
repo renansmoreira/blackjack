@@ -24,6 +24,12 @@ class Dealer {
 
     this.hand.add(dealerCard)
     this.hand.add(this.deck.draw())
+
+    if (player.hasBlackJack()) {
+      return RoundResult.PLAYER_WINS
+    }
+
+    return RoundResult.CONTINUE
   }
 
   hit(player) {

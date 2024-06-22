@@ -20,26 +20,35 @@ describe('Dealer', () => {
   })
 
   describe('startGame', () => {
-    const deck = new Deck()
-    const player = new Player()
+    let deck;
+    let player;
+
+    beforeEach(() => {
+      deck = new Deck()
+      player = new Player()
+    })
 
     it('should deal two cards to the player', () => {
+      const expectedResult = RoundResult.CONTINUE
       const dealer = new Dealer(deck)
 
-      dealer.startGame(player)
+      const result = dealer.startGame(player)
 
       expect(player.hand.cards).toHaveLength(2)
       expect(player.hand.cards[0].face).toEqual(Face.UP)
       expect(player.hand.cards[1].face).toEqual(Face.UP)
+      expect(result).toEqual(expectedResult)
     })
 
     it('should deal two card to himself', () => {
+      const expectedResult = RoundResult.CONTINUE
       const dealer = new Dealer(deck)
 
-      dealer.startGame(player)
+      const result = dealer.startGame(player)
 
       expect(dealer.hand.cards).toHaveLength(2)
       expect(dealer.hand.cards[0].face).toEqual(Face.UP)
+      expect(result).toEqual(expectedResult)
     })
 
     it('should keep one of the dealer cards faced down (the hold)', () => {
@@ -48,6 +57,21 @@ describe('Dealer', () => {
       dealer.startGame(player)
 
       expect(dealer.hand.cards[1].face).toEqual(Face.DOWN)
+    })
+
+    it('should check for player blackjack', () => {
+      const expectedResult = RoundResult.PLAYER_WINS
+      deck.cards = [
+        new Card(CardValue.TEN, Suit.CLUBS),
+        new Card(CardValue.A, Suit.HEARTS),
+        new Card(CardValue.TWO, Suit.SPADES),
+        new Card(CardValue.TWO, Suit.DIAMONDS),
+      ]
+      const dealer = new Dealer(deck)
+
+      const result = dealer.startGame(player)
+
+      expect(result).toEqual(expectedResult)
     })
   })
 

@@ -18,7 +18,7 @@ class Game {
   }
 
   start() {
-    this.dealer.startGame(this.player)
+    this.state = this.dealer.startGame(this.player)
   }
 
   hit() {

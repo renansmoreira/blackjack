@@ -33,7 +33,7 @@ describe('Game', () => {
     it('should ask the dealer to start the game', () => {
       const game = new Game('random-id')
       const dealerMock = {
-        startGame: jest.fn()
+        startGame: jest.fn().mockReturnValue(RoundResult.CONTINUE)
       }
       game.dealer = dealerMock
 
@@ -41,6 +41,19 @@ describe('Game', () => {
 
       expect(dealerMock.startGame).toHaveBeenCalledTimes(1)
       expect(dealerMock.startGame).toHaveBeenCalledWith(game.player)
+    })
+
+    it('should store the game state', () => {
+      const game = new Game('random-id')
+      const expectedGameState = RoundResult.PLAYER_WINS
+      const dealerMock = {
+        startGame: jest.fn().mockReturnValue(expectedGameState)
+      }
+      game.dealer = dealerMock
+
+      game.start()
+
+      expect(game.state).toEqual(expectedGameState)
     })
   })
 
@@ -53,7 +66,7 @@ describe('Game', () => {
 
     it('should ask the dealer to hit for the player', () => {
       const dealerMock = {
-        startGame: jest.fn(),
+        startGame: jest.fn().mockReturnValue(RoundResult.CONTINUE),
         hit: jest.fn()
       }
       game.dealer = dealerMock
@@ -68,7 +81,7 @@ describe('Game', () => {
     it('should update the game state', () => {
       const expectedRoundResult = RoundResult.DEALER_WINS
       const dealerMock = {
-        startGame: jest.fn(),
+        startGame: jest.fn().mockReturnValue(RoundResult.CONTINUE),
         hit: jest.fn().mockReturnValue(RoundResult.DEALER_WINS)
       }
       game.dealer = dealerMock
@@ -101,7 +114,7 @@ describe('Game', () => {
 
     it('should ask the dealer to stand for the player', () => {
       const dealerMock = {
-        startGame: jest.fn(),
+        startGame: jest.fn().mockReturnValue(RoundResult.CONTINUE),
         stand: jest.fn()
       }
       game.dealer = dealerMock
@@ -116,7 +129,7 @@ describe('Game', () => {
     it('should update the game state', () => {
       const expectedRoundResult = RoundResult.PLAYER_WINS
       const dealerMock = {
-        startGame: jest.fn(),
+        startGame: jest.fn().mockReturnValue(RoundResult.CONTINUE),
         stand: jest.fn().mockReturnValue(expectedRoundResult)
       }
       game.dealer = dealerMock
