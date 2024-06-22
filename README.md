@@ -27,14 +27,18 @@ This repository contains a simple implementation of the classic Blackjack game u
 1. **Clone the repository:**
 
    ```bash
-   git clone <repository-url>
-   cd blackjack-game
+   git clone https://github.com/renansmoreira/blackjack.git && cd blackjack
    ```
 
 2. **Install dependencies**
 
    ```bash
    npm install
+   ```
+
+   Optional step if you have [NVM](https://github.com/nvm-sh/nvm) installed (doesn't work for [NVM-Windows](https://github.com/coreybutler/nvm-windows)), this command will install the specific Node version for this project:
+   ```bash
+   nvm use
    ```
 
 3. **Start the server**
