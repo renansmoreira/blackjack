@@ -136,6 +136,36 @@ describe('Dealer', () => {
       expect(player.hand.cards).toHaveLength(4)
       expect(result).toEqual(RoundResult.CONTINUE)
     })
+
+    it('should declare dealer victory if the deck is empty', () => {
+      deck.cards = [
+        new Card(CardValue.TWO, Suit.CLUBS),
+        new Card(CardValue.TWO, Suit.HEARTS),
+        new Card(CardValue.FIVE, Suit.SPADES),
+        new Card(CardValue.FIVE, Suit.DIAMONDS),
+      ]
+      const dealer = new Dealer(deck)
+      dealer.startGame(player)
+
+      const result = dealer.hit(player)
+
+      expect(result).toEqual(RoundResult.DEALER_WINS)
+    })
+
+    it('should declare player victory if the deck is empty', () => {
+      deck.cards = [
+        new Card(CardValue.FIVE, Suit.CLUBS),
+        new Card(CardValue.FIVE, Suit.HEARTS),
+        new Card(CardValue.TWO, Suit.SPADES),
+        new Card(CardValue.TWO, Suit.DIAMONDS),
+      ]
+      const dealer = new Dealer(deck)
+      dealer.startGame(player)
+
+      const result = dealer.hit(player)
+
+      expect(result).toEqual(RoundResult.PLAYER_WINS)
+    })
   })
 
   describe('stand', () => {
@@ -189,6 +219,21 @@ describe('Dealer', () => {
       expect(dealer.hand.cards).toHaveLength(2)
     })
 
+    it('should not draw more cards for the dealer if the deck is exhausted', () => {
+      deck.cards = [
+        new Card(CardValue.FIVE, Suit.CLUBS),
+        new Card(CardValue.FIVE, Suit.HEARTS),
+        new Card(CardValue.TWO, Suit.SPADES),
+        new Card(CardValue.THREE, Suit.DIAMONDS),
+      ]
+      const dealer = new Dealer(deck)
+      dealer.startGame(player)
+
+      dealer.stand(player)
+
+      expect(dealer.hand.cards).toHaveLength(2)
+    })
+
     it('should check if the dealer is busted', () => {
       const expectedResult = RoundResult.PLAYER_WINS
       deck.cards = [
@@ -229,6 +274,22 @@ describe('Dealer', () => {
         new Card(CardValue.SEVEN, Suit.DIAMONDS),
         new Card(CardValue.TEN, Suit.CLUBS),
         new Card(CardValue.TEN, Suit.HEARTS),
+      ]
+      const dealer = new Dealer(deck)
+      dealer.startGame(player)
+
+      const result = dealer.stand(player)
+
+      expect(result).toEqual(expectedResult)
+    })
+
+    it('should check for draw', () => {
+    const expectedResult = RoundResult.DRAW
+      deck.cards = [
+        new Card(CardValue.SEVEN, Suit.SPADES),
+        new Card(CardValue.SEVEN, Suit.DIAMONDS),
+        new Card(CardValue.SEVEN, Suit.CLUBS),
+        new Card(CardValue.SEVEN, Suit.HEARTS),
       ]
       const dealer = new Dealer(deck)
       dealer.startGame(player)

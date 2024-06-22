@@ -46,6 +46,10 @@ class Deck {
   draw() {
     return this.cards.shift()
   }
+
+  isExhausted() {
+    return this.cards.length === 0
+  }
 }
 
 export { Deck }

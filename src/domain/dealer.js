@@ -26,9 +26,11 @@ class Dealer {
     this.hand.add(this.deck.draw())
   }
 
-  // TODO: Add validations for the remaining cards on deck
-  // TODO: Add validations for the game state and block actions
   hit(player) {
+    if (this.deck.isExhausted()) {
+      return this.stand(player)
+    }
+
     const card = this.deck.draw()
     card.turnUp()
 
@@ -45,12 +47,10 @@ class Dealer {
     return RoundResult.CONTINUE
   }
 
-  // TODO: Add validations for the remaining cards on deck
-  // TODO: Add validations for the game state and block actions
   stand(player) {
     this.hand.revealHold()
 
-    while (this.hand.points < 17) {
+    while (this.hand.points < 17 && !this.deck.isExhausted()) {
       const card = this.deck.draw()
       card.turnUp()
       this.hand.add(card)
@@ -58,6 +58,10 @@ class Dealer {
 
     if (this.hand.isBusted() || player.points() > this.hand.points) {
       return RoundResult.PLAYER_WINS
+    }
+
+    if (this.hand.points === player.points()) {
+      return RoundResult.DRAW
     }
 
     return RoundResult.DEALER_WINS

@@ -34,7 +34,11 @@ describe('Game', () => {
   })
 
   describe('hit', () => {
-    const game = new Game('random-id')
+    let game;
+
+    beforeEach(() => {
+      game = new Game('random-id')
+    })
 
     it('should ask the dealer to hit for the player', () => {
       const dealerMock = {
@@ -63,10 +67,26 @@ describe('Game', () => {
 
       expect(game.state).toEqual(expectedRoundResult)
     })
+
+    it.each([RoundResult.DEALER_WINS, RoundResult.PLAYER_WINS])('should NOT hit for a game on %s state', ({ state }) => {
+      const dealerMock = {
+        hit: jest.fn()
+      }
+      game.dealer = dealerMock
+      game.state = state
+
+      game.hit()
+
+      expect(dealerMock.hit).toHaveBeenCalledTimes(0)
+    })
   })
 
   describe('stand', () => {
-    const game = new Game('random-id')
+    let game;
+
+    beforeEach(() => {
+      game = new Game('random-id')
+    })
 
     it('should ask the dealer to stand for the player', () => {
       const dealerMock = {
@@ -94,6 +114,18 @@ describe('Game', () => {
       game.stand()
 
       expect(game.state).toEqual(expectedRoundResult)
+    })
+
+    it.each([RoundResult.DEALER_WINS, RoundResult.PLAYER_WINS])('should NOT stand for a game on %s state', ({ state }) => {
+      const dealerMock = {
+        stand: jest.fn()
+      }
+      game.dealer = dealerMock
+      game.state = state
+
+      game.stand()
+
+      expect(dealerMock.stand).toHaveBeenCalledTimes(0)
     })
   })
 })

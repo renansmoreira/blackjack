@@ -1,6 +1,8 @@
 import { Suit } from "./suit.js"
 import { Deck } from "./deck.js"
 import { Face } from "./face.js"
+import { Card } from "./card.js"
+import { CardValue } from "./cardValue.js"
 
 describe('Deck', () => {
   describe('when creating', () => {
@@ -294,6 +296,29 @@ describe('Deck', () => {
 
       expect(deck.cards).toHaveLength(50)
       // TODO: Check for the specific card in the deck
+    })
+  })
+
+  describe('isExhausted', () => {
+    it('should indicate that the deck is empty', () => {
+      const deck = new Deck()
+      deck.cards = [
+        new Card(CardValue.A, Suit.CLUBS)
+      ]
+      deck.draw()
+
+      const result = deck.isExhausted()
+
+      expect(result).toBeTruthy()
+    })
+
+    it('should indicate that the deck is NOT empty', () => {
+      const deck = new Deck()
+      deck.draw()
+
+      const result = deck.isExhausted()
+
+      expect(result).toBeFalsy()
     })
   })
 })

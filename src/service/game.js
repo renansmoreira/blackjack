@@ -22,11 +22,15 @@ class Game {
   }
 
   hit() {
-    this.state = this.dealer.hit(this.player)
+    if (this.state === RoundResult.CONTINUE) {
+      this.state = this.dealer.hit(this.player)
+    }
   }
 
   stand() {
-    this.state = this.dealer.stand(this.player)
+    if (this.state === RoundResult.CONTINUE) {
+      this.state = this.dealer.stand(this.player)
+    }
   }
 }
 
