@@ -34,7 +34,6 @@ class Hand {
   cards = []
   points = 0
 
-  // TODO: Add validation to reject the card for busted hands
   add(card) {
     this.cards.push(card)
 

@@ -6,6 +6,15 @@ import { CardValue } from "./cardValue.js"
 
 describe('Deck', () => {
   describe('when creating', () => {
+    const containsAllCardsFor = (value, cards) => {
+      const spadeCard = cards.find(card => card.value === value && card.suit === Suit.SPADES)
+      const diamondCard = cards.find(card => card.value === value && card.suit === Suit.DIAMONDS)
+      const heartCard = cards.find(card => card.value === value && card.suit === Suit.HEARTS)
+      const clubCard = cards.find(card => card.value === value && card.suit === Suit.CLUBS)
+
+      return Boolean(spadeCard) && Boolean(diamondCard) && Boolean(heartCard) && Boolean(clubCard)
+    }
+
     it('should add all the cards', () => {
       const deck = new Deck()
 
@@ -272,6 +281,19 @@ describe('Deck', () => {
           value: "K",
         },
       ])
+      expect(containsAllCardsFor(CardValue.A, deck.cards)).toBeTruthy()
+      expect(containsAllCardsFor(CardValue.TWO, deck.cards)).toBeTruthy()
+      expect(containsAllCardsFor(CardValue.THREE, deck.cards)).toBeTruthy()
+      expect(containsAllCardsFor(CardValue.FOUR, deck.cards)).toBeTruthy()
+      expect(containsAllCardsFor(CardValue.FIVE, deck.cards)).toBeTruthy()
+      expect(containsAllCardsFor(CardValue.SIX, deck.cards)).toBeTruthy()
+      expect(containsAllCardsFor(CardValue.SEVEN, deck.cards)).toBeTruthy()
+      expect(containsAllCardsFor(CardValue.EIGHT, deck.cards)).toBeTruthy()
+      expect(containsAllCardsFor(CardValue.NINE, deck.cards)).toBeTruthy()
+      expect(containsAllCardsFor(CardValue.TEN, deck.cards)).toBeTruthy()
+      expect(containsAllCardsFor(CardValue.J, deck.cards)).toBeTruthy()
+      expect(containsAllCardsFor(CardValue.Q, deck.cards)).toBeTruthy()
+      expect(containsAllCardsFor(CardValue.K, deck.cards)).toBeTruthy()
     })
   })
 
@@ -295,7 +317,6 @@ describe('Deck', () => {
       deck.draw()
 
       expect(deck.cards).toHaveLength(50)
-      // TODO: Check for the specific card in the deck
     })
   })
 
