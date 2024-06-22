@@ -14,13 +14,17 @@ describe('State', () => {
     document.body.innerHTML = ''
   })
 
-  describe('update', () => {
-    it('should display the game state', () => {
+  describe.only('update', () => {
+    it.each`
+      gameState        | expectedText
+      ${'CONTINUE'}    | ${'State: -'}
+      ${'PLAYER_WINS'} | ${'State: Player wins'}
+      ${'DEALER_WINS'} | ${'State: Dealer wins'}
+    `('should display the game state', ({ gameState, expectedText }) => {
       const game = {
-        state: 'CONTINUE'
+        state: gameState,
       }
       const state = new State(game)
-      const expectedText = 'Winner: -'
 
       state.update(game)
 

@@ -1,30 +1,84 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Blackjack</title>
+
+  <style>
+    .border-sm {
+      border: 1px solid black
+    }
+
+    .padding-sm {
+      padding: 10px;
+    }
+
+    .margin-top-sm {
+      margin-top: 10px;
+    }
+
+    main {
+      width: 100%;
+      max-width: 500px;
+      margin: 0 auto;
+    }
+
+    .cards-container {
+      display: flex;
+    }
+
+    .card {
+      display: flex;
+      flex-direction: column;
+      width: 28px;
+      border: 1px solid black;
+      border-radius: 8px;
+      padding: 5px;
+      margin-right: 10px;
+    }
+
+    .card span {
+      width: 40px;
+    }
+
+    .card img {
+      width: 20px;
+      height: 20px;
+      margin-left: 7px;
+    }
+  </style>
 </head>
+
 <body>
-  <p id="winner-banner"></p>
+  <main>
+    <p id="winner-banner"></p>
 
-  <div>
-    Dealer
-    <p id="dealer-cards"></p>
-    <p id="dealer-points"></p>
-  </div>
+    <div class="border-sm padding-sm">
+      <b>Dealer</b>
+      <p class="cards-container" id="dealer-cards"></p>
 
-  <div>
-    Player
-    <p id="player-cards"></p>
-    <p id="player-points"></p>
-  </div>
+      <div class="margin-top-sm">
+        Points: <span id="dealer-points"></span>
+      </div>
+    </div>
 
-  <div>
-    <button id="hit-button">Hit</button>
-    <button id="stand-button">Stand</button>
-    <button id="restart-button">Restart</button>
-  </div>
+    <div class="border-sm padding-sm margin-top-sm">
+      <b>Player</b>
+      <p class="cards-container" id="player-cards"></p>
+
+      <div class="margin-top-sm">
+        Points: <span id="player-points"></span>
+      </div>
+    </div>
+
+    <div class="margin-top-sm">
+      <button id="hit-button">Hit</button>
+      <button id="stand-button">Stand</button>
+      <button id="restart-button">Restart</button>
+    </div>
+  </main>
 
   <script type="module">
     import { HttpClient } from "/ui/httpClient.js"
@@ -37,4 +91,5 @@
     coordinator.start()
   </script>
 </body>
+
 </html>

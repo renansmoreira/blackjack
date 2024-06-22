@@ -15,7 +15,6 @@ describe('Cards', () => {
 
   describe('update', () => {
     it('should display the dealer cards', () => {
-      const expectedCards = 'A HEARTS | 10 CLUBS'
       const game = {
         dealer: {
           hand: {
@@ -44,11 +43,13 @@ describe('Cards', () => {
       cards.update(game)
 
       const component = document.getElementById(UI.DEALER_CARDS_CONTAINER_ID)
-      expect(component.innerText).toEqual(expectedCards)
+      expect(component.querySelectorAll('span')[0].innerText).toEqual('A')
+      expect(component.querySelectorAll('img')[0].src).toEqual('http://localhost/assets/hearts.png')
+      expect(component.querySelectorAll('span')[1].innerText).toEqual('10')
+      expect(component.querySelectorAll('img')[1].src).toEqual('http://localhost/assets/clubs.png')
     })
 
     it('should not display cards faced down', () => {
-      const expectedCards = 'A HEARTS | ?'
       const game = {
         dealer: {
           hand: {
@@ -77,7 +78,10 @@ describe('Cards', () => {
       cards.update(game)
 
       const component = document.getElementById(UI.DEALER_CARDS_CONTAINER_ID)
-      expect(component.innerText).toEqual(expectedCards)
+      expect(component.querySelectorAll('span')[0].innerText).toEqual('A')
+      expect(component.querySelectorAll('img')[0].src).toEqual('http://localhost/assets/hearts.png')
+      expect(component.querySelectorAll('span')[1].innerText).toEqual('?')
+      expect(component.querySelectorAll('img')[1].src).toEqual('http://localhost/assets/question.png')
     })
 
     it('should display the player cards', () => {
@@ -111,7 +115,10 @@ describe('Cards', () => {
       cards.update(game)
 
       const component = document.getElementById(UI.PLAYER_CARDS_CONTAINER_ID)
-      expect(component.innerText).toEqual(expectedCards)
+      expect(component.querySelectorAll('span')[0].innerText).toEqual('K')
+      expect(component.querySelectorAll('img')[0].src).toEqual('http://localhost/assets/diamonds.png')
+      expect(component.querySelectorAll('span')[1].innerText).toEqual('3')
+      expect(component.querySelectorAll('img')[1].src).toEqual('http://localhost/assets/hearts.png')
     })
   })
 })
