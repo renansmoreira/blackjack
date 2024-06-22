@@ -12,6 +12,10 @@ describe('Coordinator', () => {
   const stateMock = {
     update: jest.fn()
   }
+  const errorMessageMock = {
+    display: jest.fn(),
+    hide: jest.fn(),
+  }
 
   afterEach(() => {
     jest.resetAllMocks()
@@ -23,6 +27,7 @@ describe('Coordinator', () => {
         <button id="${UI.ACTIONS_HIT_ID}">Hit</button>
         <button id="${UI.ACTIONS_STAND_ID}">Stand</button>
         <button id="${UI.ACTIONS_RESTART_ID}">Restart</button>
+        <div id="${UI.ERROR_CONTAINER_ID}"></div>
       `
     })
 
@@ -99,6 +104,20 @@ describe('Coordinator', () => {
       expect(updateMock).toHaveBeenCalledTimes(2)
       expect(updateMock).toHaveBeenNthCalledWith(2, game)
     })
+
+    it('should handle API errors', async () => {
+      const httpClientStub = {
+        put: jest.fn().mockRejectedValue(new Error()),
+      }
+      const updateMock = jest.fn()
+      const coordinator = coordinatorFactory(httpClientStub, cardsMock, scoreMock, stateMock, errorMessageMock)
+      coordinator.update = updateMock
+
+      await coordinator.hit()
+
+      expect(updateMock).toHaveBeenCalledTimes(0)
+      expect(errorMessageMock.display).toHaveBeenCalledTimes(1)
+    })
   })
 
   describe('stand', () => {
@@ -138,6 +157,20 @@ describe('Coordinator', () => {
       expect(updateMock).toHaveBeenCalledTimes(2)
       expect(updateMock).toHaveBeenNthCalledWith(2, game)
     })
+
+    it('should handle API errors', async () => {
+      const httpClientStub = {
+        put: jest.fn().mockRejectedValue(new Error()),
+      }
+      const updateMock = jest.fn()
+      const coordinator = coordinatorFactory(httpClientStub, cardsMock, scoreMock, stateMock, errorMessageMock)
+      coordinator.update = updateMock
+
+      await coordinator.stand()
+
+      expect(updateMock).toHaveBeenCalledTimes(0)
+      expect(errorMessageMock.display).toHaveBeenCalledTimes(1)
+    })
   })
 
   describe('restart', () => {
@@ -164,7 +197,7 @@ describe('Coordinator', () => {
       const httpClientMock = {
         post: jest.fn()
       }
-      const coordinator = coordinatorFactory(httpClientMock, cardsMock, scoreMock, stateMock)
+      const coordinator = coordinatorFactory(httpClientMock, cardsMock, scoreMock, stateMock, errorMessageMock)
 
       await coordinator.start()
 
@@ -178,7 +211,7 @@ describe('Coordinator', () => {
       }
       const game = { id: 'fake-game-object' }
       httpClientStub.post.mockReturnValue(game)
-      const coordinator = coordinatorFactory(httpClientStub, cardsMock, scoreMock, stateMock)
+      const coordinator = coordinatorFactory(httpClientStub, cardsMock, scoreMock, stateMock, errorMessageMock)
 
       await coordinator.start()
 
@@ -189,6 +222,20 @@ describe('Coordinator', () => {
       expect(stateMock.update).toHaveBeenCalledTimes(1)
       expect(stateMock.update).toHaveBeenCalledWith(game)
     })
+
+    it('should handle API errors', async () => {
+      const httpClientStub = {
+        put: jest.fn().mockRejectedValue(new Error()),
+      }
+      const updateMock = jest.fn()
+      const coordinator = coordinatorFactory(httpClientStub, cardsMock, scoreMock, stateMock, errorMessageMock)
+      coordinator.update = updateMock
+
+      await coordinator.start()
+
+      expect(updateMock).toHaveBeenCalledTimes(0)
+      expect(errorMessageMock.display).toHaveBeenCalledTimes(1)
+    })
   })
 
   describe('update', () => {
@@ -198,7 +245,7 @@ describe('Coordinator', () => {
       }
       const game = { id: 'fake-game-object' }
       httpClientStub.post.mockReturnValue(game)
-      const coordinator = coordinatorFactory(httpClientStub, cardsMock, scoreMock, stateMock)
+      const coordinator = coordinatorFactory(httpClientStub, cardsMock, scoreMock, stateMock, errorMessageMock)
 
       await coordinator.start()
 
@@ -212,11 +259,12 @@ describe('Coordinator', () => {
   })
 })
 
-function coordinatorFactory(httpClient, cards, score, state) {
+function coordinatorFactory(httpClient, cards, score, state, error) {
   const coordinator = new Coordinator(httpClient)
   coordinator.cards = cards
   coordinator.score = score
   coordinator.state = state
+  coordinator.errorMessage = error
 
   return coordinator
 }

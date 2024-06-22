@@ -1,5 +1,6 @@
 import { UI } from "./constants.js"
 import { Cards } from "./modules/cards.js"
+import { ErrorMessage } from "./modules/errorMessage.js"
 import { Score } from "./modules/score.js"
 import { State } from "./modules/state.js"
 
@@ -8,6 +9,7 @@ class Coordinator {
   cards = new Cards()
   score = new Score()
   state = new State()
+  errorMessage = new ErrorMessage()
   httpClient = {}
 
   constructor(httpClient) {
@@ -35,31 +37,38 @@ class Coordinator {
   }
 
   async hit() {
-    this.game = await this.httpClient.put(`/hit/${this.game.id}`)
-    this.update(this.game)
+    try {
+      this.game = await this.httpClient.put(`/hit/${this.game.id}`)
+      this.update(this.game)
+    } catch {
+      this.errorMessage.display()
+    }
   }
 
   async stand() {
-    this.game = await this.httpClient.put(`/stand/${this.game.id}`)
-    this.update(this.game)
+    try {
+      this.game = await this.httpClient.put(`/stand/${this.game.id}`)
+      this.update(this.game)
+    } catch {
+      this.errorMessage.display()
+    }
   }
 
   async restart() {
     this.start()
   }
 
-  update(result) {
-    this.updateCards()
-    this.updateScore()
-    this.updateGameState(result)
-  }
-
   async start() {
-    this.game = await this.httpClient.post('/start')
-    this.update(this.game)
+    try {
+      this.game = await this.httpClient.post('/start')
+      this.update(this.game)
+    } catch {
+      this.errorMessage.display()
+    }
   }
 
   update(game) {
+    this.errorMessage.hide()
     this.cards.update(game)
     this.score.update(game)
     this.state.update(game)

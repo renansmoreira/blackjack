@@ -1,5 +1,6 @@
 export const UI = {
   WINNER_BANNER_ID: 'winner-banner',
+  ERROR_CONTAINER_ID: 'game-error',
 
   DEALER_CARDS_CONTAINER_ID: 'dealer-cards',
   DEALER_POINTS_CONTAINER_ID: 'dealer-points',

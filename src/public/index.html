@@ -25,6 +25,11 @@
       margin: 0 auto;
     }
 
+    .game-error {
+      color: red;
+      display: none;
+    }
+
     .cards-container {
       display: flex;
     }
@@ -71,6 +76,10 @@
       <div class="margin-top-sm">
         Points: <span id="player-points"></span>
       </div>
+    </div>
+
+    <div id="game-error" class="margin-top-sm game-error">
+      <span>Unknown game error, please restart the game or reload the page</span>
     </div>
 
     <div class="margin-top-sm">
