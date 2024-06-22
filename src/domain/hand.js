@@ -1,18 +1,19 @@
+import { CardValue } from "./cardValue.js"
+
 const pointsMap = new Map([
-  ['A', 11],
-  ['2', 2],
-  ['3', 3],
-  ['4', 4],
-  ['5', 5],
-  ['6', 6],
-  ['7', 7],
-  ['8', 8],
-  ['9', 9],
-  ['10', 10],
-  ['J', 10],
-  ['Q', 10],
-  ['K', 10],
-  ['A', 11],
+  [CardValue.A, 11],
+  [CardValue.TWO, 2],
+  [CardValue.THREE, 3],
+  [CardValue.FOUR, 4],
+  [CardValue.FIVE, 5],
+  [CardValue.SIX, 6],
+  [CardValue.SEVEN, 7],
+  [CardValue.EIGHT, 8],
+  [CardValue.NINE, 9],
+  [CardValue.TEN, 10],
+  [CardValue.J, 10],
+  [CardValue.Q, 10],
+  [CardValue.K, 10],
 ])
 
 const calculateCardPoints = (card, currentPoints) => {
@@ -22,7 +23,7 @@ const calculateCardPoints = (card, currentPoints) => {
 
   const point = pointsMap.get(card.value)
 
-  if (point === 11 && currentPoints + point > 21) {
+  if (card.value === CardValue.A && currentPoints + point > 21) {
     return 1
   }
 

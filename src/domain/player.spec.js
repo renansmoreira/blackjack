@@ -1,5 +1,6 @@
 import { createFacedUpCard } from "../test-helpers/utils.js"
 import { Card } from "./card.js"
+import { CardValue } from "./cardValue.js"
 import { Player } from "./player.js"
 import { Suit } from "./suit.js"
 
@@ -19,7 +20,7 @@ describe('Player', () => {
 
   describe('collectCard', () => {
     it('should add the new card to the hand', () => {
-      const card = new Card('A', Suit.CLUBS)
+      const card = new Card(CardValue.A, Suit.CLUBS)
       const player = new Player(name)
 
       player.collectCard(card)

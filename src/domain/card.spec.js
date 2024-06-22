@@ -1,6 +1,7 @@
 import { Suit } from "./suit.js"
 import { Card } from "./card.js"
 import { Face } from "./face.js"
+import { CardValue } from "./cardValue.js"
 
 describe('Card', () => {
   describe('when creating', () => {
@@ -18,7 +19,7 @@ describe('Card', () => {
 
   describe('turnUp', () => {
     it('should turn the card up', () => {
-      const card = new Card('A', Suit.CLUBS)
+      const card = new Card(CardValue.A, Suit.CLUBS)
 
       card.turnUp()
 
@@ -30,7 +31,7 @@ describe('Card', () => {
     let card;
 
     beforeEach(() => {
-      card = new Card('K', Suit.SPADES)
+      card = new Card(CardValue.K, Suit.SPADES)
     })
 
     it('should check that the card if turned up', () => {

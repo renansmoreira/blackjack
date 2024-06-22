@@ -1,5 +1,6 @@
 import { createFacedUpCard } from "../test-helpers/utils.js"
 import { Card } from "./card.js"
+import { CardValue } from "./cardValue.js"
 import { Face } from "./face.js"
 import { Hand } from "./hand.js"
 import { Suit } from "./suit.js"
@@ -10,8 +11,8 @@ describe('Hand', () => {
     let anotherCard
 
     beforeEach(() => {
-      card = new Card('10', Suit.DIAMONDS)
-      anotherCard = new Card('2', Suit.HEARTS)
+      card = new Card(CardValue.TEN, Suit.DIAMONDS)
+      anotherCard = new Card(CardValue.TWO, Suit.HEARTS)
     })
 
     it('should add one card', () => {
@@ -96,7 +97,7 @@ describe('Hand', () => {
   describe('revealHold', () => {
     it('should reveal a card faced down', () => {
       const hand = new Hand()
-      hand.add(new Card('A', Suit.CLUBS))
+      hand.add(new Card(CardValue.A, Suit.CLUBS))
 
       hand.revealHold()
 
@@ -106,7 +107,7 @@ describe('Hand', () => {
     it('should add the card value to the score', () => {
       const hand = new Hand()
       hand.add(createFacedUpCard('2', Suit.DIAMONDS))
-      hand.add(new Card('A', Suit.CLUBS))
+      hand.add(new Card(CardValue.A, Suit.CLUBS))
 
       hand.revealHold()
 
@@ -116,7 +117,7 @@ describe('Hand', () => {
     it('should not change a card already faced up', () => {
       const hand = new Hand()
       hand.add(createFacedUpCard('2', Suit.DIAMONDS))
-      hand.add(new Card('A', Suit.CLUBS))
+      hand.add(new Card(CardValue.A, Suit.CLUBS))
       hand.revealHold()
 
       hand.revealHold()
@@ -127,7 +128,7 @@ describe('Hand', () => {
     it('should not change the score for a card already faced up', () => {
       const hand = new Hand()
       hand.add(createFacedUpCard('2', Suit.DIAMONDS))
-      hand.add(new Card('A', Suit.CLUBS))
+      hand.add(new Card(CardValue.A, Suit.CLUBS))
       hand.revealHold()
 
       hand.revealHold()

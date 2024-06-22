@@ -5,6 +5,7 @@ import { Face } from "./face.js"
 import { Card } from "./card.js"
 import { Suit } from "./suit.js"
 import { RoundResult } from "./roundResult.js"
+import { CardValue } from "./cardValue.js"
 
 describe('Dealer', () => {
   describe('when constructing', () => {
@@ -71,11 +72,11 @@ describe('Dealer', () => {
 
     it('should continue if the player has not a blackjack and is not busted', () => {
       deck.cards = [
-        new Card('5', Suit.CLUBS),
-        new Card('5', Suit.HEARTS),
-        new Card('2', Suit.SPADES),
-        new Card('2', Suit.DIAMONDS),
-        new Card('10', Suit.SPADES),
+        new Card(CardValue.FIVE, Suit.CLUBS),
+        new Card(CardValue.FIVE, Suit.HEARTS),
+        new Card(CardValue.TWO, Suit.SPADES),
+        new Card(CardValue.TWO, Suit.DIAMONDS),
+        new Card(CardValue.TEN, Suit.SPADES),
       ]
       const dealer = new Dealer(deck)
       dealer.startGame(player)
@@ -87,11 +88,11 @@ describe('Dealer', () => {
 
     it('should check if the player is busted', () => {
       deck.cards = [
-        new Card('10', Suit.CLUBS),
-        new Card('10', Suit.HEARTS),
-        new Card('2', Suit.SPADES),
-        new Card('2', Suit.DIAMONDS),
-        new Card('10', Suit.SPADES),
+        new Card(CardValue.TEN, Suit.CLUBS),
+        new Card(CardValue.TEN, Suit.HEARTS),
+        new Card(CardValue.TWO, Suit.SPADES),
+        new Card(CardValue.TWO, Suit.DIAMONDS),
+        new Card(CardValue.TEN, Suit.SPADES),
       ]
       const dealer = new Dealer(deck)
       dealer.startGame(player)
@@ -103,11 +104,11 @@ describe('Dealer', () => {
 
     it('should check if the player has a blackjack', () => {
       deck.cards = [
-        new Card('10', Suit.CLUBS),
-        new Card('8', Suit.HEARTS),
-        new Card('2', Suit.SPADES),
-        new Card('2', Suit.DIAMONDS),
-        new Card('3', Suit.SPADES),
+        new Card(CardValue.TEN, Suit.CLUBS),
+        new Card(CardValue.EIGHT, Suit.HEARTS),
+        new Card(CardValue.TWO, Suit.SPADES),
+        new Card(CardValue.TWO, Suit.DIAMONDS),
+        new Card(CardValue.THREE, Suit.SPADES),
       ]
       const dealer = new Dealer(deck)
       dealer.startGame(player)
@@ -119,12 +120,12 @@ describe('Dealer', () => {
 
     it('should allow the player to hit if the game needs to continue', () => {
       deck.cards = [
-        new Card('5', Suit.CLUBS),
-        new Card('5', Suit.HEARTS),
-        new Card('2', Suit.SPADES),
-        new Card('2', Suit.DIAMONDS),
-        new Card('3', Suit.SPADES),
-        new Card('3', Suit.HEARTS),
+        new Card(CardValue.FIVE, Suit.CLUBS),
+        new Card(CardValue.FIVE, Suit.HEARTS),
+        new Card(CardValue.TWO, Suit.SPADES),
+        new Card(CardValue.TWO, Suit.DIAMONDS),
+        new Card(CardValue.THREE, Suit.SPADES),
+        new Card(CardValue.THREE, Suit.HEARTS),
       ]
       const dealer = new Dealer(deck)
       dealer.startGame(player)
@@ -158,12 +159,12 @@ describe('Dealer', () => {
 
     it('should draw more cards for the dealer', () => {
       deck.cards = [
-        new Card('5', Suit.CLUBS),
-        new Card('5', Suit.HEARTS),
-        new Card('10', Suit.SPADES),
-        new Card('2', Suit.DIAMONDS),
-        new Card('4', Suit.SPADES),
-        new Card('5', Suit.HEARTS),
+        new Card(CardValue.FIVE, Suit.CLUBS),
+        new Card(CardValue.FIVE, Suit.HEARTS),
+        new Card(CardValue.TEN, Suit.SPADES),
+        new Card(CardValue.TWO, Suit.DIAMONDS),
+        new Card(CardValue.FOUR, Suit.SPADES),
+        new Card(CardValue.FIVE, Suit.HEARTS),
       ]
       const dealer = new Dealer(deck)
       dealer.startGame(player)
@@ -175,10 +176,10 @@ describe('Dealer', () => {
 
     it('should not draw more cards for the dealer', () => {
       deck.cards = [
-        new Card('5', Suit.CLUBS),
-        new Card('5', Suit.HEARTS),
-        new Card('10', Suit.SPADES),
-        new Card('8', Suit.DIAMONDS),
+        new Card(CardValue.FIVE, Suit.CLUBS),
+        new Card(CardValue.FIVE, Suit.HEARTS),
+        new Card(CardValue.TEN, Suit.SPADES),
+        new Card(CardValue.EIGHT, Suit.DIAMONDS),
       ]
       const dealer = new Dealer(deck)
       dealer.startGame(player)
@@ -191,11 +192,11 @@ describe('Dealer', () => {
     it('should check if the dealer is busted', () => {
       const expectedResult = RoundResult.PLAYER_WINS
       deck.cards = [
-        new Card('5', Suit.CLUBS),
-        new Card('5', Suit.HEARTS),
-        new Card('10', Suit.SPADES),
-        new Card('6', Suit.DIAMONDS),
-        new Card('10', Suit.CLUBS),
+        new Card(CardValue.FIVE, Suit.CLUBS),
+        new Card(CardValue.FIVE, Suit.HEARTS),
+        new Card(CardValue.TEN, Suit.SPADES),
+        new Card(CardValue.SIX, Suit.DIAMONDS),
+        new Card(CardValue.TEN, Suit.CLUBS),
       ]
       const dealer = new Dealer(deck)
       dealer.startGame(player)
@@ -208,10 +209,10 @@ describe('Dealer', () => {
     it('should check that the player wins the game', () => {
       const expectedResult = RoundResult.PLAYER_WINS
       deck.cards = [
-        new Card('10', Suit.CLUBS),
-        new Card('10', Suit.HEARTS),
-        new Card('10', Suit.SPADES),
-        new Card('7', Suit.DIAMONDS),
+        new Card(CardValue.TEN, Suit.CLUBS),
+        new Card(CardValue.TEN, Suit.HEARTS),
+        new Card(CardValue.TEN, Suit.SPADES),
+        new Card(CardValue.SEVEN, Suit.DIAMONDS),
       ]
       const dealer = new Dealer(deck)
       dealer.startGame(player)
@@ -224,10 +225,10 @@ describe('Dealer', () => {
     it('should check that the dealer wins the game', () => {
       const expectedResult = RoundResult.DEALER_WINS
       deck.cards = [
-        new Card('10', Suit.SPADES),
-        new Card('7', Suit.DIAMONDS),
-        new Card('10', Suit.CLUBS),
-        new Card('10', Suit.HEARTS),
+        new Card(CardValue.TEN, Suit.SPADES),
+        new Card(CardValue.SEVEN, Suit.DIAMONDS),
+        new Card(CardValue.TEN, Suit.CLUBS),
+        new Card(CardValue.TEN, Suit.HEARTS),
       ]
       const dealer = new Dealer(deck)
       dealer.startGame(player)
