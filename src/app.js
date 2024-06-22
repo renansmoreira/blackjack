@@ -23,7 +23,7 @@ app.post('/start', (_, res) => {
   res.json(mappers.mapGame(game))
 })
 
-app.post('/hit/:id', (req, res) => {
+app.put('/hit/:id', (req, res) => {
   const game = database.findGame(req.params.id)
 
   if (game instanceof GameNullObject) {
@@ -35,7 +35,7 @@ app.post('/hit/:id', (req, res) => {
   res.json(mappers.mapGame(game))
 })
 
-app.post('/stand/:id', (req, res) => {
+app.put('/stand/:id', (req, res) => {
   const game = database.findGame(req.params.id)
 
   if (game instanceof GameNullObject) {

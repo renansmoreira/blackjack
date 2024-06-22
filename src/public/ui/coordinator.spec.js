@@ -71,7 +71,8 @@ describe('Coordinator', () => {
 
     it('should call the API with the hit action', async () => {
       const httpClientMock = {
-        post: jest.fn().mockResolvedValue(game)
+        post: jest.fn().mockResolvedValue(game),
+        put: jest.fn().mockResolvedValue(game),
       }
       const coordinator = new Coordinator(httpClientMock)
       coordinator.update = jest.fn()
@@ -79,13 +80,14 @@ describe('Coordinator', () => {
 
       await coordinator.hit()
 
-      expect(httpClientMock.post).toHaveBeenCalledTimes(2)
-      expect(httpClientMock.post).toHaveBeenNthCalledWith(2, `/hit/${game.id}`)
+      expect(httpClientMock.put).toHaveBeenCalledTimes(1)
+      expect(httpClientMock.put).toHaveBeenCalledWith(`/hit/${game.id}`)
     })
 
     it('should update the game', async () => {
       const httpClientStub = {
-        post: jest.fn().mockResolvedValue(game)
+        post: jest.fn().mockResolvedValue(game),
+        put: jest.fn().mockResolvedValue(game),
       }
       const updateMock = jest.fn()
       const coordinator = new Coordinator(httpClientStub)
@@ -108,7 +110,8 @@ describe('Coordinator', () => {
 
     it('should call the API with the stand action', async () => {
       const httpClientMock = {
-        post: jest.fn().mockResolvedValue(game)
+        post: jest.fn().mockResolvedValue(game),
+        put: jest.fn().mockResolvedValue(game),
       }
       const coordinator = new Coordinator(httpClientMock)
       coordinator.update = jest.fn()
@@ -116,13 +119,14 @@ describe('Coordinator', () => {
 
       await coordinator.stand()
 
-      expect(httpClientMock.post).toHaveBeenCalledTimes(2)
-      expect(httpClientMock.post).toHaveBeenNthCalledWith(2, `/stand/${game.id}`)
+      expect(httpClientMock.put).toHaveBeenCalledTimes(1)
+      expect(httpClientMock.put).toHaveBeenCalledWith(`/stand/${game.id}`)
     })
 
     it('should update the game', async () => {
       const httpClientStub = {
-        post: jest.fn().mockResolvedValue(game)
+        post: jest.fn().mockResolvedValue(game),
+        put: jest.fn().mockResolvedValue(game),
       }
       const updateMock = jest.fn()
       const coordinator = new Coordinator(httpClientStub)

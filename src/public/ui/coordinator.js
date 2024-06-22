@@ -35,12 +35,12 @@ class Coordinator {
   }
 
   async hit() {
-    this.game = await this.httpClient.post(`/hit/${this.game.id}`)
+    this.game = await this.httpClient.put(`/hit/${this.game.id}`)
     this.update(this.game)
   }
 
   async stand() {
-    this.game = await this.httpClient.post(`/stand/${this.game.id}`)
+    this.game = await this.httpClient.put(`/stand/${this.game.id}`)
     this.update(this.game)
   }
 

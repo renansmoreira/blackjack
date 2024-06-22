@@ -6,6 +6,14 @@ class HttpClient {
 
     return response.json()
   }
+
+  async put(url) {
+    const response = await fetch(url, {
+      method: 'PUT'
+    })
+
+    return response.json()
+  }
 }
 
 export { HttpClient }
