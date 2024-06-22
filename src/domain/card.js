@@ -3,6 +3,7 @@ import { Face } from "./face.js"
 class Card {
   value = ''
   suit = ''
+  // TODO: Remove this attribute, it should not be part of card responsibility
   point = 0
   face = Face.DOWN
 

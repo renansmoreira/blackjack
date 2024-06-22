@@ -50,6 +50,35 @@ describe('Hand', () => {
 
       expect(hand.points).toEqual(10)
     })
+
+    describe('when scoring for Ace cards', () => {
+      it.each`
+      expectedPoints | cards
+      ${11}          | ${[createFacedUpCard('A', Suit.CLUBS, 11)]}
+      ${20}          | ${[createFacedUpCard('9', Suit.CLUBS, 9), createFacedUpCard('A', Suit.HEARTS, 11)]}
+      ${24}          | ${[createFacedUpCard('3', Suit.CLUBS, 3), createFacedUpCard('A', Suit.HEARTS, 11), createFacedUpCard('10', Suit.DIAMONDS, 10)]}
+      `('should score with maximum value', ({ expectedPoints, cards }) => {
+        const hand = new Hand()
+        cards.forEach(card => hand.add(card))
+
+        const result = hand.points
+
+        expect(result).toEqual(expectedPoints)
+      })
+
+      it.each`
+      expectedPoints | cards
+      ${12}          | ${[createFacedUpCard('A', Suit.CLUBS, 11), createFacedUpCard('A', Suit.HEARTS, 11)]}
+      ${14}          | ${[createFacedUpCard('3', Suit.CLUBS, 3), createFacedUpCard('10', Suit.DIAMONDS, 10), createFacedUpCard('A', Suit.HEARTS, 11)]}
+      `('should score with minimum value', ({ expectedPoints, cards }) => {
+        const hand = new Hand()
+        cards.forEach(card => hand.add(card))
+
+        const result = hand.points
+
+        expect(result).toEqual(expectedPoints)
+      })
+    })
   })
 
   describe('revealHold', () => {

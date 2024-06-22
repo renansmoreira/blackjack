@@ -1,13 +1,21 @@
+const calculateCardPoints = (card, currentPoints) => {
+  if (card.point === 11 && currentPoints + card.point > 21) {
+    return 1
+  }
+
+  return card.point
+}
+
 class Hand {
   cards = []
   points = 0
 
-  // TODO: Add Ace check for 11 or 1 point
+  // TODO: Add validation to reject the card for busted hands
   add(card) {
     this.cards.push(card)
 
     if (card.isVisible()) {
-      this.points += card.point
+      this.points += calculateCardPoints(card, this.points)
     }
   }
 
@@ -16,7 +24,7 @@ class Hand {
 
     if (!card.isVisible()) {
       card.turnUp()
-      this.points += card.point
+      this.points += calculateCardPoints(card, this.points)
     }
   }
 
