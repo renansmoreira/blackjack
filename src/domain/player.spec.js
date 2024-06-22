@@ -19,7 +19,7 @@ describe('Player', () => {
 
   describe('collectCard', () => {
     it('should add the new card to the hand', () => {
-      const card = new Card('A', Suit.CLUBS, 11)
+      const card = new Card('A', Suit.CLUBS)
       const player = new Player(name)
 
       player.collectCard(card)
@@ -31,9 +31,9 @@ describe('Player', () => {
   describe('isBusted', () => {
     it('should indicate if the player is busted', () => {
       const player = new Player(name)
-      player.collectCard(createFacedUpCard(10, Suit.CLUBS, 10))
-      player.collectCard(createFacedUpCard(10, Suit.DIAMONDS, 10))
-      player.collectCard(createFacedUpCard(10, Suit.SPADES, 10))
+      player.collectCard(createFacedUpCard('10', Suit.CLUBS))
+      player.collectCard(createFacedUpCard('10', Suit.DIAMONDS))
+      player.collectCard(createFacedUpCard('10', Suit.SPADES))
 
       const result = player.isBusted()
 
@@ -44,8 +44,8 @@ describe('Player', () => {
   describe('hasBlackJack', () => {
     it('should indicate if the player has a blackjack', () => {
       const player = new Player(name)
-      player.collectCard(createFacedUpCard('A', Suit.CLUBS, 11))
-      player.collectCard(createFacedUpCard(10, Suit.DIAMONDS, 10))
+      player.collectCard(createFacedUpCard('A', Suit.CLUBS))
+      player.collectCard(createFacedUpCard('10', Suit.DIAMONDS))
 
       const result = player.hasBlackJack()
 
@@ -57,8 +57,8 @@ describe('Player', () => {
     it('should display player points', () => {
       const expectedPoints = 8
       const player = new Player(name)
-      player.collectCard(createFacedUpCard(5, Suit.CLUBS, 5))
-      player.collectCard(createFacedUpCard(3, Suit.DIAMONDS, 3))
+      player.collectCard(createFacedUpCard('5', Suit.CLUBS))
+      player.collectCard(createFacedUpCard('3', Suit.DIAMONDS))
 
       const result = player.points()
 

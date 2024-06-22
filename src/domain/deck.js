@@ -6,10 +6,10 @@ class Deck {
 
   constructor() {
     const cards = [
-      new Card('A', Suit.CLUBS, 11),
-      new Card('A', Suit.DIAMONDS, 11),
-      new Card('A', Suit.HEARTS, 11),
-      new Card('A', Suit.SPADES, 11),
+      new Card('A', Suit.CLUBS),
+      new Card('A', Suit.DIAMONDS),
+      new Card('A', Suit.HEARTS),
+      new Card('A', Suit.SPADES),
     ]
 
     for (let number = 2; number < 11; number++) {
@@ -22,20 +22,20 @@ class Deck {
     this.cards = [
       ...cards,
 
-      new Card('J', Suit.CLUBS, 10),
-      new Card('J', Suit.DIAMONDS, 10),
-      new Card('J', Suit.HEARTS, 10),
-      new Card('J', Suit.SPADES, 10),
+      new Card('J', Suit.CLUBS),
+      new Card('J', Suit.DIAMONDS),
+      new Card('J', Suit.HEARTS),
+      new Card('J', Suit.SPADES),
 
-      new Card('Q', Suit.CLUBS, 10),
-      new Card('Q', Suit.DIAMONDS, 10),
-      new Card('Q', Suit.HEARTS, 10),
-      new Card('Q', Suit.SPADES, 10),
+      new Card('Q', Suit.CLUBS),
+      new Card('Q', Suit.DIAMONDS),
+      new Card('Q', Suit.HEARTS),
+      new Card('Q', Suit.SPADES),
 
-      new Card('K', Suit.CLUBS, 10),
-      new Card('K', Suit.DIAMONDS, 10),
-      new Card('K', Suit.HEARTS, 10),
-      new Card('K', Suit.SPADES, 10),
+      new Card('K', Suit.CLUBS),
+      new Card('K', Suit.DIAMONDS),
+      new Card('K', Suit.HEARTS),
+      new Card('K', Suit.SPADES),
     ]
   }
 

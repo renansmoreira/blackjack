@@ -10,8 +10,8 @@ describe('Hand', () => {
     let anotherCard
 
     beforeEach(() => {
-      card = new Card('10', Suit.DIAMONDS, 10)
-      anotherCard = new Card('2', Suit.HEARTS, 2)
+      card = new Card('10', Suit.DIAMONDS)
+      anotherCard = new Card('2', Suit.HEARTS)
     })
 
     it('should add one card', () => {
@@ -42,6 +42,17 @@ describe('Hand', () => {
       expect(hand.points).toEqual(12)
     })
 
+    it('should handle invalid cards', () => {
+      const invalidCard = createFacedUpCard('JOKER', Suit.CLUBS)
+      card.turnUp()
+      const hand = new Hand()
+      hand.add(card)
+
+      hand.add(invalidCard)
+
+      expect(hand.points).toEqual(10)
+    })
+
     it('should not update the points for cards faced down', () => {
       card.turnUp()
       const hand = new Hand()
@@ -55,9 +66,9 @@ describe('Hand', () => {
     describe('when scoring for Ace cards', () => {
       it.each`
       expectedPoints | cards
-      ${11}          | ${[createFacedUpCard('A', Suit.CLUBS, 11)]}
-      ${20}          | ${[createFacedUpCard('9', Suit.CLUBS, 9), createFacedUpCard('A', Suit.HEARTS, 11)]}
-      ${24}          | ${[createFacedUpCard('3', Suit.CLUBS, 3), createFacedUpCard('A', Suit.HEARTS, 11), createFacedUpCard('10', Suit.DIAMONDS, 10)]}
+      ${11}          | ${[createFacedUpCard('A', Suit.CLUBS)]}
+      ${20}          | ${[createFacedUpCard('9', Suit.CLUBS), createFacedUpCard('A', Suit.HEARTS)]}
+      ${24}          | ${[createFacedUpCard('3', Suit.CLUBS), createFacedUpCard('A', Suit.HEARTS), createFacedUpCard('10', Suit.DIAMONDS)]}
       `('should score with maximum value', ({ expectedPoints, cards }) => {
         const hand = new Hand()
         cards.forEach(card => hand.add(card))
@@ -69,8 +80,8 @@ describe('Hand', () => {
 
       it.each`
       expectedPoints | cards
-      ${12}          | ${[createFacedUpCard('A', Suit.CLUBS, 11), createFacedUpCard('A', Suit.HEARTS, 11)]}
-      ${14}          | ${[createFacedUpCard('3', Suit.CLUBS, 3), createFacedUpCard('10', Suit.DIAMONDS, 10), createFacedUpCard('A', Suit.HEARTS, 11)]}
+      ${12}          | ${[createFacedUpCard('A', Suit.CLUBS), createFacedUpCard('A', Suit.HEARTS)]}
+      ${14}          | ${[createFacedUpCard('3', Suit.CLUBS), createFacedUpCard('10', Suit.DIAMONDS), createFacedUpCard('A', Suit.HEARTS)]}
       `('should score with minimum value', ({ expectedPoints, cards }) => {
         const hand = new Hand()
         cards.forEach(card => hand.add(card))
@@ -85,7 +96,7 @@ describe('Hand', () => {
   describe('revealHold', () => {
     it('should reveal a card faced down', () => {
       const hand = new Hand()
-      hand.add(new Card('A', Suit.CLUBS, 11))
+      hand.add(new Card('A', Suit.CLUBS))
 
       hand.revealHold()
 
@@ -94,8 +105,8 @@ describe('Hand', () => {
 
     it('should add the card value to the score', () => {
       const hand = new Hand()
-      hand.add(createFacedUpCard(2, Suit.DIAMONDS, 2))
-      hand.add(new Card('A', Suit.CLUBS, 11))
+      hand.add(createFacedUpCard('2', Suit.DIAMONDS))
+      hand.add(new Card('A', Suit.CLUBS))
 
       hand.revealHold()
 
@@ -104,8 +115,8 @@ describe('Hand', () => {
 
     it('should not change a card already faced up', () => {
       const hand = new Hand()
-      hand.add(createFacedUpCard(2, Suit.DIAMONDS, 2))
-      hand.add(new Card('A', Suit.CLUBS, 11))
+      hand.add(createFacedUpCard('2', Suit.DIAMONDS))
+      hand.add(new Card('A', Suit.CLUBS))
       hand.revealHold()
 
       hand.revealHold()
@@ -115,8 +126,8 @@ describe('Hand', () => {
 
     it('should not change the score for a card already faced up', () => {
       const hand = new Hand()
-      hand.add(createFacedUpCard(2, Suit.DIAMONDS, 2))
-      hand.add(new Card('A', Suit.CLUBS, 11))
+      hand.add(createFacedUpCard('2', Suit.DIAMONDS))
+      hand.add(new Card('A', Suit.CLUBS))
       hand.revealHold()
 
       hand.revealHold()
@@ -128,9 +139,9 @@ describe('Hand', () => {
   describe('isBusted', () => {
     it('should check if the hand is busted', () => {
       const hand = new Hand()
-      hand.add(createFacedUpCard(10, Suit.CLUBS, 10))
-      hand.add(createFacedUpCard(10, Suit.DIAMONDS, 10))
-      hand.add(createFacedUpCard(10, Suit.SPADES, 10))
+      hand.add(createFacedUpCard('10', Suit.CLUBS))
+      hand.add(createFacedUpCard('10', Suit.DIAMONDS))
+      hand.add(createFacedUpCard('10', Suit.SPADES))
 
       const result = hand.isBusted()
 
@@ -141,8 +152,8 @@ describe('Hand', () => {
   describe('isBlackJack', () => {
     it('should check if the hand contains blackjack', () => {
       const hand = new Hand()
-      hand.add(createFacedUpCard('A', Suit.CLUBS, 11))
-      hand.add(createFacedUpCard(10, Suit.DIAMONDS, 10))
+      hand.add(createFacedUpCard('A', Suit.CLUBS))
+      hand.add(createFacedUpCard('10', Suit.DIAMONDS))
 
       const result = hand.isBlackJack()
 

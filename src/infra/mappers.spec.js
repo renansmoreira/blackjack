@@ -10,7 +10,7 @@ import { createFacedUpCard } from '../test-helpers/utils'
 describe('mappers', () => {
   describe('mapCard', () => {
     it('should map a card', () => {
-      const card = new Card('10', Suit.CLUBS, 10)
+      const card = new Card('10', Suit.CLUBS)
       const expectedResult = {
         isVisible: false,
         value: '10',
@@ -23,7 +23,7 @@ describe('mappers', () => {
     })
 
     it('should map a visible card', () => {
-      const card = createFacedUpCard('10', Suit.CLUBS, 10)
+      const card = createFacedUpCard('10', Suit.CLUBS)
       const expectedResult = {
         isVisible: true,
         value: '10',
@@ -41,8 +41,8 @@ describe('mappers', () => {
       const expectedCardCount = 2
       const expectedPoints = 17
       const hand = new Hand()
-      hand.add(createFacedUpCard('10', Suit.CLUBS, 10))
-      hand.add(createFacedUpCard('7', Suit.DIAMONDS, 7))
+      hand.add(createFacedUpCard('10', Suit.CLUBS))
+      hand.add(createFacedUpCard('7', Suit.DIAMONDS))
       const mappers = new Mappers()
 
       const result = mappers.mapHand(hand)
@@ -53,8 +53,8 @@ describe('mappers', () => {
 
     it('should map all the cards', () => {
       const hand = new Hand()
-      hand.add(new Card('10', Suit.CLUBS, 10))
-      hand.add(new Card('7', Suit.DIAMONDS, 7))
+      hand.add(new Card('10', Suit.CLUBS))
+      hand.add(new Card('7', Suit.DIAMONDS))
       const mappers = new Mappers()
       mappers.mapCard = jest.fn()
 

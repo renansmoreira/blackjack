@@ -3,14 +3,11 @@ import { Face } from "./face.js"
 class Card {
   value = ''
   suit = ''
-  // TODO: Remove this attribute, it should not be part of card responsibility
-  point = 0
   face = Face.DOWN
 
-  constructor(value, suit, point) {
+  constructor(value, suit) {
     this.value = value
     this.suit = suit
-    this.point = point
   }
 
   turnUp() {
